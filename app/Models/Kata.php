@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Kata extends Model
 {
     use HasFactory;
+    protected $table = "katas";
 }

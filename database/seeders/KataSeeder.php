@@ -18,5 +18,8 @@ class KataSeeder extends Seeder
             'password' => Hash::make('asdf'),
         ]);
         echo "Seeder executed successfully!\n";
+        // $kata = [
+            
+        // ]
     }
 }
