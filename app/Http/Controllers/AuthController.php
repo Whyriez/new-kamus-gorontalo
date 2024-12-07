@@ -16,11 +16,21 @@ class AuthController extends Controller
         $password = $request->password;
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             $request->session()->regenerate();
-            return redirect()->intended('tambahKata');
+            return redirect()->intended('dashboard');
         } else {
             return redirect()->intended('login');
         }
 
         return back();
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

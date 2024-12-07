@@ -18,6 +18,7 @@ return new class extends Migration
             $table->String('kategori')->nullable();
             $table->String('kesopanan')->nullable();
             $table->String('kalimat')->nullable();
+            $table->String('pengucapan')->nullable();
             $table->String('gambar')->nullable();
             $table->String('suara')->nullable();
         });
