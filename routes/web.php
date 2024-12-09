@@ -19,12 +19,17 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 
-Route::get('/', [UserController::class, 'viewWelc'])->name('welcome');
+//                ==== AUTH ====
 Route::get('/login', [AuthController::class, 'viewLogin'])->name('login');
 Route::post('proses_login', [AuthController::class, 'proses_login'])->name('auth.proses_login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+
+Route::get('/', [UserController::class, 'viewWelc'])->name('welcome');
 Route::get('/search', [UserController::class, 'search'])->name('search');
 Route::get('/kata/{id}', [UserController::class, 'getById'])->name('kata.getById');
+Route::get('/register', [UserController::class, 'viewRegister'])->name('viewRegister');
+Route::get('/register_pending', [UserController::class, 'afterRegister'])->name('afterRegister');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [UserController::class, 'viewDashboard'])->name('dashboard');

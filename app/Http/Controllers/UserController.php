@@ -14,6 +14,14 @@ class UserController extends Controller
        return view('welcome');
     }
 
+    public function viewRegister(){
+      return view('auth.register');
+    
+    }
+    public function afterRegister(){
+      return view('auth.afterRegister');
+    }
+
     public function formCreateKata(){
       return view('admin.createKata')->with(['user' => Auth::user()]);
     }
@@ -73,17 +81,12 @@ class UserController extends Controller
     }
 
     public function search(Request $request) {
-      // Ambil input dari user
       $query = $request->input('q');
       
-      // Cari kata yang cocok di database
       $results = Kata::where('gorontalo', 'LIKE', "%$query%")
                       ->orWhere('indonesia', 'LIKE', "%$query%")
-                      ->orWhere('kategori', 'LIKE', "%$query%")
-                      ->orWhere('kalimat', 'LIKE', "%$query%")
                       ->get();
   
-      // Kembalikan hasil ke view
       return view('search_result', compact('results'));
     }
     
