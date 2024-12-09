@@ -13,9 +13,10 @@ class KataSeeder extends Seeder
     public function run(): void
     {
         DB::table('katas')->insert([
-            'name' => "hilalbouti",
-            'email' => 'hilalbouti57@gmail.com',
-            'password' => Hash::make('asdf'),
+            'name' => "hilal bouti",
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('123'),
+            'status' => 'admin',
         ]);
         echo "Seeder executed successfully!\n";
         // $kata = [
