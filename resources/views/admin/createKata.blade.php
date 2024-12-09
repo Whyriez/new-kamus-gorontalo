@@ -28,19 +28,19 @@
 
                 <div class="mb-2">
                     <label for="kategori" class="block text-zinc-600 text-sm font-bold mb-2">Kategori</label>
-                    <select id="kategori"
+                    <select id="kategori" name="kategori"
                         class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         <option>- Pilih kategori kata -</option>
-                        <option>Nomina</option>
-                        <option>Verba</option>
-                        <option>Adjektiv</option>
-                        <option>Adverbia</option>
-                        <option>Pronomina</option>
-                        <option>Numeralia</option>
-                        <option>Preposisi</option>
-                        <option>Konjungsi</option>
-                        <option>Interjeksi</option>
-                        <option>Artikula</option>
+                        <option value="Nomina">Nomina</option>
+                        <option value="Verba">Verba</option>
+                        <option value="Adjektiv">Adjektiv</option>
+                        <option value="Adverbia">Adverbia</option>
+                        <option value="Pronomina">Pronomina</option>
+                        <option value="Numeralia">Numeralia</option>
+                        <option value="Preposisi">Preposisi</option>
+                        <option value="Konjungsi">Konjungsi</option>
+                        <option value="Interjeksi">Interjeksi</option>
+                        <option value="Artikula">Artikula</option>
                     </select>
                 </div>
                 <div class="mb-2">

@@ -49,6 +49,52 @@ class UserController extends Controller
 
       return redirect('create_kata')->with('success', 'Data berhasil ditambahkan.');
     }
+
+    public function deleteKata($id)
+    {
+        $data = Kata::where('id_kata', $id)->get();
+        Kata::where('id_kata', $id)->delete();
+        
+        return redirect()->route('daftarKata')->with('success', 'Data berhasil dihapus.');
+        $dataDetail = Share::where('idFilePenelitian', $id)->get();
+        if ($data) {
+            $pathFile = $data->file;
+            // dd($pathFile);
+            if ($pathFile != null || $pathFile != '') {
+                Storage::delete($pathFile);
+            }
+
+            foreach ($dataDetail as $share) {
+                $share->delete();
+            }
+
+            Penelitian::where('id_file', $id)->delete();
+        }
+    }
+
+    public function search(Request $request) {
+      // Ambil input dari user
+      $query = $request->input('q');
+      
+      // Cari kata yang cocok di database
+      $results = Kata::where('gorontalo', 'LIKE', "%$query%")
+                      ->orWhere('indonesia', 'LIKE', "%$query%")
+                      ->orWhere('kategori', 'LIKE', "%$query%")
+                      ->orWhere('kalimat', 'LIKE', "%$query%")
+                      ->get();
+  
+      // Kembalikan hasil ke view
+      return view('search_result', compact('results'));
+    }
     
+    public function getById($id) {
+      $kata = Kata::find($id);
+  
+      if (!$kata) {
+          return redirect()->back()->with('error', 'Kata tidak ditemukan.');
+      }
+  
+      return view('detail_kata', compact('kata'));
+    }
     
 }

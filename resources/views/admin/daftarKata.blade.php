@@ -43,7 +43,7 @@
                         Kategori
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Kesopanan
+                        Kalimat
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action
@@ -66,11 +66,11 @@
                         {{ $kata->kategori }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $kata->kalimat }}
+                       "{{ $kata->kalimat }}"
                     </td>
                     <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
-                        <a href="#" class="font-medium text-blue-600 hover:underline">Hapus</a>
+                        <a href="#" class="font-medium bg-blue-600 text-white rounded-md px-2 py-1 hover:bg-blue-800">Edit</a>
+                        <a href="{{ route('deleteKata', $kata->id_kata) }}" class="font-medium bg-red-600 text-white rounded-md px-2 py-1 hover:bg-red-800">Hapus</a>
                     </td>
                 </tr>
                 @endforeach

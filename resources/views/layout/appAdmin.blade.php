@@ -22,9 +22,9 @@
             </path>
         </svg>
     </button>
-    <div class="flex">
+    <div>
         <aside id="logo-sidebar"
-            class=" z-40 w-1/6 h-screen transition-transform -translate-x-full sm:translate-x-0"
+            class="fixed z-40 w-1/6 h-screen transition-transform -translate-x-full sm:translate-x-0"
             aria-label="Sidebar">
             <div class="h-full px-3 py-4 overflow-y-auto bg-gradient-to-b from-purple-900 to-black">
                 <div class="flex items-center gap-3">
@@ -36,7 +36,7 @@
                 </div>
                 <ul class="space-y-2 font-medium">
                     <li>
-                        <a href="#"
+                        <a href="{{ route('dashboard') }}"
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <span class="ms-3">Dashboard</span>
                         </a>
@@ -68,9 +68,14 @@
                 </ul>
             </div>
         </aside>
-        <div class="justify-end w-5/6">
-            @yield('konten_admin')
+        <div class="flex w-screen">
+            <div class="w-1/6">
+            </div>
+            <div class="w-5/6">
+                @yield('konten_admin')
+            </div>
         </div>
+        
     </div>
 
     {{-- <script src="../../../node_modules/flowbite/dist/flowbite.min.js"></script> --}}

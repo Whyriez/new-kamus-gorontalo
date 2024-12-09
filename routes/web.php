@@ -23,12 +23,20 @@ Route::get('/', [UserController::class, 'viewWelc'])->name('welcome');
 Route::get('/login', [AuthController::class, 'viewLogin'])->name('login');
 Route::post('proses_login', [AuthController::class, 'proses_login'])->name('auth.proses_login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/search', [UserController::class, 'search'])->name('search');
+Route::get('/kata/{id}', [UserController::class, 'getById'])->name('kata.getById');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [UserController::class, 'viewDashboard'])->name('dashboard');
     Route::get('/daftar_kata', [UserController::class, 'viewDaftarKata'])->name('daftarKata');
     Route::get('/create_kata', [UserController::class, 'formCreateKata'])->name('formCreateKata');
     Route::post('/simpan_kata', [UserController::class, 'simpanKata'])->name('simpanKata');
-   
+    Route::get('/delete/kata/{id}', [UserController::class, 'deleteKata'])->name('deleteKata');
+    
+
+
+
+
+
 });
 
