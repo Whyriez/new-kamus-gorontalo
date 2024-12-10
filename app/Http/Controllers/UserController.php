@@ -19,6 +19,10 @@ class UserController extends Controller
       return view('auth.register');
     
     }
+    public function adminSidebar(){
+      return view('layout.adminSidebar');
+    
+    }
 
     public function afterRegister(){
       return view('auth.afterRegister');
