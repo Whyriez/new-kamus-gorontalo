@@ -15,11 +15,30 @@ class AkunSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => "Hilal Bouti",
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('123'),
-        ]);
+        $users = [
+            [
+                'name' => "hilal bouti",
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('123'),
+                'role' => 'admin',
+            ],
+            [
+                'name' => "tes editor",
+                'email' => 'editor@gmail.com',
+                'password' => Hash::make('123'),
+                'role' => 'editor',
+            ],
+            [
+                'name' => "editor jj",
+                'email' => 'editor2@gmail.com',
+                'password' => Hash::make('123'),
+            ],
+            
+        ];
         echo "Seeder executed successfully!\n";
+
+        foreach ($users as $key => $value) {
+            DB::table('users')->insert($value);
+        }
     }
 }

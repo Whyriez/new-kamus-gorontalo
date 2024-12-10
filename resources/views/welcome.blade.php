@@ -16,6 +16,7 @@
         <form class="relative w-full max-w-2xl mx-auto" action="{{ route('search') }}" method="GET">
         <input 
             type="search" 
+            name="q"
             class="block w-full h-16 p-4 pl-14 text-lg text-gray-900 rounded-full bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:outline-none" 
             placeholder="cari kata" 
             required 

@@ -6,10 +6,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Kata;
+use App\Models\User;
 
 class UserController extends Controller
 {
-   //   VIEW ROUTING
+   //   Visitor View Routing
     public function viewWelc(){
        return view('welcome');
     }
@@ -18,12 +19,41 @@ class UserController extends Controller
       return view('auth.register');
     
     }
+
     public function afterRegister(){
       return view('auth.afterRegister');
     }
 
+    public function search(Request $request) {
+      $query = $request->input('q');
+      
+      $results = Kata::where('gorontalo', 'LIKE', "%$query%")
+                      ->orWhere('indonesia', 'LIKE', "%$query%")
+                      ->get();
+  
+      return view('search_result', compact('results'));
+    }
+    
+    public function getById($id) {
+      $kata = Kata::find($id);
+  
+      if (!$kata) {
+          return redirect()->back()->with('error', 'Kata tidak ditemukan.');
+      }
+  
+      return view('detail_kata', compact('kata'));
+    }
+
+    //##########======== Admin View Routing =========############
+
     public function formCreateKata(){
       return view('admin.createKata')->with(['user' => Auth::user()]);
+    }
+
+    public function viewAturEditor(){
+      $dataEditor = User::whereIn('role', ['editor', 'pending'])->get();
+
+      return view('admin.aturEditor')->with(['dataEditor' => $dataEditor, 'user' => Auth::user()]);
     }
 
     public function viewDaftarKata(){
@@ -80,24 +110,6 @@ class UserController extends Controller
         }
     }
 
-    public function search(Request $request) {
-      $query = $request->input('q');
-      
-      $results = Kata::where('gorontalo', 'LIKE', "%$query%")
-                      ->orWhere('indonesia', 'LIKE', "%$query%")
-                      ->get();
-  
-      return view('search_result', compact('results'));
-    }
     
-    public function getById($id) {
-      $kata = Kata::find($id);
-  
-      if (!$kata) {
-          return redirect()->back()->with('error', 'Kata tidak ditemukan.');
-      }
-  
-      return view('detail_kata', compact('kata'));
-    }
     
 }
