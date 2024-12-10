@@ -29,6 +29,7 @@ Route::get('/', [UserController::class, 'viewWelc'])->name('welcome');
 Route::get('/search', [UserController::class, 'search'])->name('search');
 Route::get('/kata/{id}', [UserController::class, 'getById'])->name('kata.getById');
 Route::get('/register', [UserController::class, 'viewRegister'])->name('viewRegister');
+Route::get('/adminSidebar', [UserController::class, 'adminSidebar'])->name('adminSidebar');
 Route::get('/register_pending', [UserController::class, 'afterRegister'])->name('afterRegister');
 
 Route::group(['middleware' => 'auth'], function () {
