@@ -50,14 +50,14 @@
                     <input type="text" id="arti" name="pengucapan"
                         class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                 </div>
-                <div class="flex mt-4">
+                <div class="mt-4">
                     <label class=" text-zinc-600 text-sm font-bold my-2 mr-4">File</label>
-                    <button
-                        class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Upload
-                        Gambar <i class="fas fa-upload"></i></button>
-                    <button
-                        class="bg-white hover:bg-gray-100 text-gray-8 00 font-semibold py-2 px-4 border ml-2 border-gray-400 rounded shadow">Upload
-                        Audio <i class="fas fa-upload"></i></button>
+                    <input type="file" name="gambar"
+                        class="bg-white hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Upload
+                        Gambar <i class="fas fa-upload"></i>
+                    <input type="file" name="suara"
+                        class="bg-white hover:bg-gray-100 font-semibold py-2 px-4 border ml-2 border-gray-400 rounded shadow">
+                         <i class="fas fa-upload"></i>
                 </div>
                 <div class="mb-2 mt-4">
                     <label for="arti" class="block text-zinc-600 text-sm font-bold my-2">Contoh Kalimat</label>
@@ -66,6 +66,7 @@
                 </div>
                 <div class="flex w-full">
                     <button
+                    type="submit"
                         class="justify-end bg-blue-500 hover:bg-blue-700 text-zinc-600 font-bold py-2 px-4 rounded">Simpan</button>
                 </div>
             </div>

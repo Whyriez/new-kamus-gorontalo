@@ -34,12 +34,14 @@ Route::get('/register_pending', [UserController::class, 'afterRegister'])->name(
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [UserController::class, 'viewDashboard'])->name('dashboard');
-    Route::get('/daftar_kata', [UserController::class, 'viewDaftarKata'])->name('daftarKata');
     Route::get('/kelola_editor', [UserController::class, 'viewAturEditor'])->name('aturEditor');
+    Route::get('/kelola_editor/edit/{id_editor}', [UserController::class, 'viewEditEditor'])->name('editAccEditor');
+    
+    Route::get('/daftar_kata', [UserController::class, 'viewDaftarKata'])->name('daftarKata');
     Route::get('/create_kata', [UserController::class, 'formCreateKata'])->name('formCreateKata');
     Route::post('/simpan_kata', [UserController::class, 'simpanKata'])->name('simpanKata');
     Route::get('/delete/kata/{id}', [UserController::class, 'deleteKata'])->name('deleteKata');
-    
+    Route::get('/edit/kata/{id}', [UserController::class, 'editKata'])->name('editKata');
 
 
 

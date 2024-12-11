@@ -7,7 +7,7 @@
 @vite('resources/css/app.css')
 <h1 class="text-2xl">Daftar Kata</h1>
 <div class="m-4 bg-purple-900 rounded-lg">
-    <div class="relative overflow-x-auto shadow-2xl sm:rounded-lg">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="p-4 bg-white flex justify-between">
             <label for="table-search" class="sr-only">Search</label>
             <div class="relative mt-1">
@@ -69,12 +69,11 @@
                        "{{ $kata->kalimat }}"
                     </td>
                     <td class="px-6 py-4">
-                        <a href="#" class="font-medium bg-blue-600 text-white rounded-md px-2 py-1 hover:bg-blue-800">Edit</a>
+                        <a href="{{ route('editKata', $kata->id_kata) }}" class="font-medium bg-blue-600 text-white rounded-md px-2 py-1 hover:bg-blue-800">Edit</a>
                         <a href="{{ route('deleteKata', $kata->id_kata) }}" class="font-medium bg-red-600 text-white rounded-md px-2 py-1 hover:bg-red-800">Hapus</a>
                     </td>
                 </tr>
                 @endforeach
-                <!-- Tambahan baris lainnya -->
             </tbody>
         </table>
     </div>

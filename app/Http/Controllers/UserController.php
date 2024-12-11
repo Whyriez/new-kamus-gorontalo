@@ -38,8 +38,8 @@ class UserController extends Controller
       return view('search_result', compact('results'));
     }
     
-    public function getById($id) {
-      $kata = Kata::find($id);
+    public function getById($primaryKey) {
+      $kata = Kata::find($primaryKey);
   
       if (!$kata) {
           return redirect()->back()->with('error', 'Kata tidak ditemukan.');
@@ -63,6 +63,17 @@ class UserController extends Controller
     public function viewDaftarKata(){
       $dataKata = Kata::all();
       return view('admin.daftarKata')->with(['dataKata' => $dataKata, 'user' => Auth::user()]);
+    }
+    public function editKata($id_kata){
+      $dataKata = Kata::where('id_kata', $id_kata)->get();
+        
+        return view('admin.editKata')->with(['dataKata' => $dataKata, 'user' => Auth::user()]);
+    }
+
+    public function viewEditEditor($id){
+      $acc = User::where('id', $id)->get();
+        
+        return view('admin.edit_editor')->with([ 'acc' => $acc,'user' => Auth::user()]);
     }
     
     public function viewDashboard(){
@@ -98,6 +109,8 @@ class UserController extends Controller
         Kata::where('id_kata', $id)->delete();
         
         return redirect()->route('daftarKata')->with('success', 'Data berhasil dihapus.');
+        
+        // Ref. Delete File
         $dataDetail = Share::where('idFilePenelitian', $id)->get();
         if ($data) {
             $pathFile = $data->file;
@@ -110,7 +123,6 @@ class UserController extends Controller
                 $share->delete();
             }
 
-            Penelitian::where('id_file', $id)->delete();
         }
     }
 
