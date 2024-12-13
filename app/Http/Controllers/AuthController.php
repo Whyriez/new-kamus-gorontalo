@@ -36,9 +36,7 @@ class AuthController extends Controller
             //     'attempt' => Auth::attempt(['email' => $request->email, 'password' => $request->password]),
             // ]);
             $request->session()->regenerate();
-            return redirect()->intended('dashboard')
-            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
-            ->header('Pragma', 'no-cache');
+            return redirect()->intended('dashboard');
         } else {
             // dd([
             //     'session_id' => session()->getId(),

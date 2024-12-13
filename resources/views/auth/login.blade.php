@@ -23,7 +23,6 @@
     
           <form method="POST" action="{{ route('auth.proses_login') }}" class="space-y-6">
             @csrf
-    
             <div class="relative ">
               <label class="flex items-center space-x-2 text-gray-700">
                 <i class="fas fa-envelope text-xl"></i>
