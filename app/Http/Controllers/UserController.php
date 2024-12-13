@@ -108,9 +108,9 @@ class UserController extends Controller
     }
 
     public function viewEditEditor($id){
-      $acc = User::where('id', $id)->get();
-        
-        return view('admin.edit_editor')->with([ 'acc' => $acc,'user' => Auth::user()]);
+      $dataEditor = User::whereIn('role', ['editor', 'pending'])->get();
+
+      return view('admin.edit_editor')->with(['dataEditor' => $dataEditor, 'user' => Auth::user()]);
     }
     
     public function viewDashboard(){
