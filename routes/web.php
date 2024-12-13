@@ -32,6 +32,7 @@ Route::get('/register', [UserController::class, 'viewRegister'])->name('viewRegi
 Route::get('/adminSidebar', [UserController::class, 'adminSidebar'])->name('adminSidebar');
 Route::post('/proses_register', [UserController::class, 'proses_register'])->name('prosesRegister');
 Route::get('/register_pending', [UserController::class, 'afterRegister'])->name('afterRegister');
+Route::get('/appVisitor', [UserController::class, 'appVisitor'])->name('appVisitor');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [UserController::class, 'viewDashboard'])->name('dashboard');
