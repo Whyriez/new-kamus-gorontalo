@@ -31,6 +31,7 @@ Route::get('/kata/{id}', [UserController::class, 'getById'])->name('kata.getById
 Route::get('/register', [UserController::class, 'viewRegister'])->name('viewRegister');
 Route::get('/adminSidebar', [UserController::class, 'adminSidebar'])->name('adminSidebar');
 Route::get('/register_pending', [UserController::class, 'afterRegister'])->name('afterRegister');
+Route::get('/appVisitor', [UserController::class, 'appVisitor'])->name('appVisitor');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [UserController::class, 'viewDashboard'])->name('dashboard');

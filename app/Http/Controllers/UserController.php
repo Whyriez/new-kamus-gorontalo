@@ -28,6 +28,10 @@ class UserController extends Controller
       return view('auth.afterRegister');
     }
 
+    public function appVisitor(){
+      return view('layout.appVisitor');
+    }
+
     public function search(Request $request) {
       $query = $request->input('q');
       
