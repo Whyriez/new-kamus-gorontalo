@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -22,6 +23,38 @@ class UserController extends Controller
     public function adminSidebar(){
       return view('layout.adminSidebar');
     
+    }
+
+    public function proses_register(Request $request)
+    {
+        try {
+            // dd($request->all());
+            $request->validate([
+                'fullName' => 'required|string|max:255',
+                'username' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:6|confirmed',
+                'phone_number' => 'required|string|min:6|max:15',
+                // dd($request->all())
+            ]);
+            // dd($request->all());
+            User::create([
+                'fullname' => $request->fullName,
+                'name' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                // 'role' => 'Pending',
+                'phone_number' => $request->phone_number,
+            ]);
+
+            return redirect('register_pending')->with('success', 'Pendaftaran sukses, Terimakasih telah mendaftar! 🫡😁 Silahkan menunggu admin untuk aktivasi akun.');
+        } catch (\Throwable $e) {
+            // dd($e->getMessage());
+            Log::error('Error in registration: ' . $e->getMessage()); 
+            $errors = ['error' => $e->getMessage()];
+            // dd($errors->all());
+            return redirect()->back()->withInput()->withErrors($errors);
+        }
     }
 
     public function afterRegister(){

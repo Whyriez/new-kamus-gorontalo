@@ -6,6 +6,4 @@
 {{-- bgmn klo kase sama deng view detail kata yg visitor lia?  --}}
 {{-- Beken akan joooo --}}
 
-
-
 @endsection
