@@ -100,7 +100,34 @@
       @yield('konten_admin') 
    </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Track if modal is being shown
+            let isModalShown = false;
 
+            window.addEventListener("popstate", (event) => {
+                if (!isModalShown) {
+                    // Prevent navigating back
+                    history.pushState(null, "");
+                    // Show modal
+                    document.getElementById("logout-modal").classList.remove("hidden");
+                    isModalShown = true;
+                }
+            });
+
+            // Handle logout confirmation
+            document.getElementById("confirm-logout").addEventListener("click", () => {
+                window.location.href = "{{ route('logout') }}"; // Logout route
+            });
+
+            // Handle modal cancel
+            document.getElementById("cancel-logout").addEventListener("click", () => {
+                document.getElementById("logout-modal").classList.add("hidden");
+                isModalShown = false;
+            });
+        });
+    </script>
 <script src="../../../node_modules/flowbite/dist/flowbite.min.js"></script>
 @vite(['resources/js/app.js'])
 

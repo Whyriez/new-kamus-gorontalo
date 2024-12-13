@@ -14,7 +14,7 @@
             <b>Opps!</b> {{session('error')}}
         </div>
       @endif
-    <div class="flex items-center justify-center min-h-screen bg-gradient-to-b from-purple-700 to-purple-900">
+    <div class="flex items-center justify-center min-h-screen bg-gradient-to-b from-purple-800 to-purple-900">
      
         <div class="bg-gray-200 p-8 rounded-md shadow-lg w-full max-w-md text-center">
        
@@ -60,6 +60,37 @@
           <p class="mt-1">Belum punya akun? <a href="{{ route('viewRegister') }}" class=" text-blue-500 hover:text-blue-700">Daftar disini</a></p>
         </div>
       </div>
+
+      {{-- <div x-data="{ showLogoutModal: false }">
+        <!-- Trigger Modal -->
+        <button 
+            class="hidden" 
+            x-ref="logoutTrigger" 
+            @click="showLogoutModal = true">
+        </button>
+    
+        <!-- Modal -->
+        <div 
+            x-show="showLogoutModal" 
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div class="bg-white rounded-lg p-6 max-w-sm w-full">
+                <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
+                <p class="text-sm text-gray-600 mt-2">Apakah Anda yakin ingin logout?</p>
+                <div class="flex justify-end gap-4 mt-4">
+                    <button 
+                        class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300" 
+                        @click="showLogoutModal = false">Batal</button>
+                    <a 
+                        href="{{ route('logout') }}" 
+                        class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div> --}}
+    </div>
+
 </body>
+
 </html>
 

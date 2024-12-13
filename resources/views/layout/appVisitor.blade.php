@@ -19,7 +19,7 @@
             <form class="relative w-2/3" action="{{ route('search') }}" method="GET">
                 <input 
                     type="search" 
-                    name="search" 
+                    name="q" 
                     placeholder="Cari Kata" 
                     class="w-full pl-4 pr-10 py-2 border border-gray-400 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                     required
