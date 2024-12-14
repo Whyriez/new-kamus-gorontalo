@@ -1,10 +1,8 @@
-@extends('layout.app')
-@extends('layout.appVisitor')
-@section('title', 'Detail Kata')
-@section('konten')
+@extends('layout.appAdmin')
+@section('konten_admin')
 
-<div class="w-4/5 px-14 md:py-4 py-10 mx-auto">
-    <div class="flex flex-col lg:flex-row justify-between p-6">
+<div class="w-11/12 mx-auto">
+    <div class="flex flex-col lg:flex-row justify-between">
     @foreach($dataKata as $kata)
         <div class="w-full lg:w-1/2 order-2 lg:order-1">
             <div class="flex items-center mt-5">
@@ -24,6 +22,16 @@
             <div class="mt-10 max-w-sm">
                 <h1 class="text-gray-700 text-md font-semibold">Kalimat :</h1>
                 <p class="text-sm">{{ $kata->kalimat }}</p>
+
+                <!-- Tombol Edit dan Hapus -->
+                <div class="flex mt-4 space-x-4">
+                    <a href="{{ route('editKata', $kata->id_kata) }}" class="bg-blue-500 hover:bg-blue-600 text-white text-center w-24 px-5 py-2 rounded text-sm">
+                        Edit
+                    </a>
+                    <a href="{{ route('deleteKata', $kata->id_kata) }}" class="bg-red-500 hover:bg-red-600 text-white text-center w-24 px-5 py-2 rounded text-sm">
+                        Hapus
+                    </a>
+                </div>
             </div>
         </div>
         <div class="w-full lg:w-1/2 order-1 lg:order-2 flex justify-center mt-5">
@@ -38,18 +46,3 @@
 
 
 @endsection
-
-
-<!-- <div class="flex justify-between items-center mb-4">
-            <a href="{{ route('login') }}" class="text-lg font-bold hover:text-zinc-400">
-                Tumuwoto Log
-            </a>
-            <div class="relative mb-4 flex justify-center">
-                <input type="text" placeholder="" class="bg-gray-100 w-[400px] h-8 pl-3 pr-8 rounded-full text-sm focus:outline-none">
-                <span class="absolute right-14 top-2 text-gray-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1116.65 6.65a7.5 7.5 0 010 10.7z" />
-                    </svg>
-                </span>
-            </div>
-        </div> -->

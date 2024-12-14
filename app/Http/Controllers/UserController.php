@@ -68,6 +68,11 @@ class UserController extends Controller
       $dataKata = Kata::all();
       return view('admin.daftarKata')->with(['dataKata' => $dataKata, 'user' => Auth::user()]);
     }
+    public function viewKata($id_kata){
+      $dataKata = Kata::where('id_kata', $id_kata)->get();
+        
+        return view('admin.viewKata')->with(['dataKata' => $dataKata, 'user' => Auth::user()]);
+    }
     public function editKata($id_kata){
       $dataKata = Kata::where('id_kata', $id_kata)->get();
         

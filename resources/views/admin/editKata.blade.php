@@ -57,11 +57,11 @@
                     <div class="mt-4">
                         <label class="block text-zinc-600 text-sm font-bold my-2">File</label>
                         <input type="file" name="gambar"
-                            class="bg-white hover:bg-gray-100 font-semibold border border-gray-400 rounded shadow">
-                            <i class="fas fa-upload text-zinc-600 text-sm font-bold my-2 mx-2">Gambar</i>
+                            class="bg-white hover:bg-gray-100 font-semibold border border-gray-400 rounded shadow w-full md:w-1/3">
+                            <i class="fas fa-upload text-zinc-600 text-sm font-bold my-2 md:mx-2 mx-0">Gambar</i>
                         <input type="file" name="suara"
-                            class="bg-white hover:bg-gray-100 font-semibold border ml-4 border-gray-400 rounded shadow">
-                            <i class="fas fa-upload text-zinc-600 text-sm font-bold my-2 mx-2">Suara</i>
+                            class="bg-white hover:bg-gray-100 font-semibold border md:ml-4 ml-0 border-gray-400 rounded shadow w-full md:w-1/3">
+                            <i class="fas fa-upload text-zinc-600 text-sm font-bold my-2 md:mx-2 mx-0">Suara</i>
                     </div>
                     <div class="mt-4">
                         <label for="arti" class="block text-zinc-600 text-sm font-bold my-2">Contoh Kalimat</label>

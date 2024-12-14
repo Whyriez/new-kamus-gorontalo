@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/simpan_kata', [UserController::class, 'simpanKata'])->name('simpanKata');
     Route::get('/delete/kata/{id}', [UserController::class, 'deleteKata'])->name('deleteKata');
     Route::get('/edit/kata/{id}', [UserController::class, 'editKata'])->name('editKata');
+    Route::get('/view/kata/{id}', [UserController::class, 'viewKata'])->name('viewKata');
 
 
 

@@ -13,10 +13,10 @@
     <!-- Navbar -->
     <div class="bg-gray-100 p-6 shadow-md fixed top-0 left-0 w-full z-50">
         <div class="mx-auto flex justify-between items-center max-w-4xl">
-            <a href="{{ route('login') }}" class="text-lg font-bold hover:text-zinc-400">
+            <a href="{{ route('login') }}" class="text-md md:text-lg font-bold hover:text-zinc-400">
                 Tumuwoto Log
             </a>
-            <form class="relative w-2/3" action="{{ route('search') }}" method="GET">
+            <form class="relative md:w-2/3 w-1/2" action="{{ route('search') }}" method="GET">
                 <input 
                     type="search" 
                     name="search" 
