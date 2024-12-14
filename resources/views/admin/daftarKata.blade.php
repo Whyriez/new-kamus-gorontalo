@@ -5,7 +5,7 @@
 @extends('layout.appAdmin')
 @section('konten_admin')
 @vite('resources/css/app.css')
-<h1 class="text-2xl">Daftar Kata</h1>
+<h1 class="text-3xl font-extrabold text-black text-center">Daftar Kata</h1>
 <div class="m-4 bg-purple-900 rounded-lg">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="p-4 bg-white flex justify-between">
@@ -20,7 +20,7 @@
             </div>
             <div>
                 <a href="{{ route('formCreateKata') }}">
-                    <button class="p-2 rounded-md hover:bg-purple-600 bg-purple-500 font-semibold text-white">
+                    <button class="p-2 rounded-md hover:bg-purple-600 bg-purple-500 font-bold text-white">
                         + Kata
                     </button>
                 </a>
