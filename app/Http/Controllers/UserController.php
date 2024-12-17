@@ -71,7 +71,7 @@ class UserController extends Controller
       $results = Kata::where('gorontalo', 'LIKE', "%$query%")
                       ->orWhere('indonesia', 'LIKE', "%$query%")
                       ->get();
-  
+      
       return view('search_result', compact('results'));
     }
     
@@ -104,11 +104,67 @@ class UserController extends Controller
     public function editKata($id_kata){
       $dataKata = Kata::where('id_kata', $id_kata)->get();
         
-        return view('admin.editKata')->with(['dataKata' => $dataKata, 'user' => Auth::user()]);
+      return view('admin.editKata')->with(['dataKata' => $dataKata, 'user' => Auth::user()]);
+    }
+
+    public function updateKata(Request $request){
+      // dd($request->all());  
+      $id = $request->input('id_kata');
+      // dd($id);
+      $gorontalo = $request->gorontalo;
+      $indonesia = $request->indonesia;
+      $kategori = $request->kategori;
+      $kalimat = $request->kalimat;
+      $pengucapan = $request->pengucapan;
+      $suara = $request->suara;
+      $gambar = $request->gambar;
+
+      // dd($id, $gorontalo, $indonesia, $kategori, $kalimat, $pengucapan, $suara, $gambar);
+      $kata = Kata::find($id);
+      $kata->gorontalo = $gorontalo; 
+      $kata->indonesia = $indonesia;
+      $kata->kategori = $kategori;
+      $kata->kalimat = $kalimat;
+      $kata->pengucapan = $pengucapan;
+      $kata->gambar = $gambar;
+      $kata->suara = $suara;
+      $kata->save();
+
+      $dataKata = Kata::all();
+      return redirect()->route('daftarKata')
+        ->with('success', 'Data berhasil diubah.')
+        ->with(['dataKata' => $dataKata, 'user' => Auth::user()]);
     }
 
     public function viewEditEditor($id){
-      $dataEditor = User::whereIn('role', ['editor', 'pending'])->get();
+      
+      $dataEditor = User::where('id', $id)->get();
+
+      return view('admin.edit_editor')->with(['dataEditor' => $dataEditor, 'user' => Auth::user()]);
+    }
+
+    public function validasiEditor(Request $request){
+      // $dataEditor = User::where('id', $id)->get();
+      // $dataEditor = User::where('id', $id)->get();
+      // $id = $request->input('id');
+      // $role = $request->role;
+      $editor = User::find($request->id);
+
+      if ($editor) {
+        // Update role pengguna
+        $editor->role = $request->role;
+        $editor->save();
+      }
+      // $editor = User::find($id);
+      // $editor->role = $role;
+      // $role->save();
+
+    //   User::insert([
+        
+    //     'role' => $request->role,
+    //     // 'role' => 'Pending',
+    // ]);
+      
 
       return view('admin.edit_editor')->with(['dataEditor' => $dataEditor, 'user' => Auth::user()]);
     }
@@ -142,7 +198,7 @@ class UserController extends Controller
 
     public function deleteKata($id)
     {
-        $data = Kata::where('id_kata', $id)->get();
+        // $data = Kata::where('id_kata', $id)->get();
         Kata::where('id_kata', $id)->delete();
         
         return redirect()->route('daftarKata')->with('success', 'Data berhasil dihapus.');

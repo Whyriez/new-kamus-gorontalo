@@ -57,7 +57,7 @@
                     <td class="px-6 py-4">{{ $loop->iteration }}</td>
                     <td class="px-6 py-4 font-medium text-gray-900">{{ $editor->name }}</td>
                     <td class="px-6 py-4">{{ $editor->email }}</td>
-                    <td class="px-6 py-4">{{ $editor->no_hp }}</td>
+                    <td class="px-6 py-4">{{ $editor->phone_number }}</td>
                     <td class="px-6 py-4">{{ $editor->role }}</td>
                     <td class="px-6 py-4">
                         <a href="{{ route('editAccEditor', $editor->id) }}"

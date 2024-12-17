@@ -21,6 +21,7 @@ return new class extends Migration
             $table->String('pengucapan')->nullable();
             $table->String('gambar')->nullable();
             $table->String('suara')->nullable();
+            $table->timestamps();
         });
     }
 
