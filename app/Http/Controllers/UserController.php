@@ -144,33 +144,53 @@ class UserController extends Controller
     }
 
     public function validasiEditor(Request $request){
-      // $dataEditor = User::where('id', $id)->get();
-      // $dataEditor = User::where('id', $id)->get();
-      // $id = $request->input('id');
-      // $role = $request->role;
-      $editor = User::find($request->id);
+      
+      // $dataEditor = User::find($request->id);
+      $id = $request->id;
+      $dataEditor = User::where('id', $id)->get();
+      // $dataEditor = User::find($id);
 
-      if ($editor) {
+      foreach ($dataEditor as $editor) {
         // Update role pengguna
         $editor->role = $request->role;
+        // Simpan perubahan
         $editor->save();
       }
-      // $editor = User::find($id);
-      // $editor->role = $role;
-      // $role->save();
+      // $dataEditor->role = $request->role;
+      // $dataEditor->save();
+      // dd($dataEditor); 
 
-    //   User::insert([
-        
-    //     'role' => $request->role,
-    //     // 'role' => 'Pending',
-    // ]);
-      
+      return view('admin.edit_editor')->with(['dataEditor' => $dataEditor, 'user' => Auth::user()]);
+    }
+    public function tolakEditor(Request $request){
+
+      // $dataEditor = User::find($request->id);
+      $id = $request->id;
+      $dataEditor = User::where('id', $id)->get();
+      // $dataEditor = User::find($id);
+
+
+      foreach ($dataEditor as $editor) {
+        // Update role pengguna
+        $editor->role = $request->role;
+        // Simpan perubahan
+        $editor->save();
+      }
 
       return view('admin.edit_editor')->with(['dataEditor' => $dataEditor, 'user' => Auth::user()]);
     }
     
     public function viewDashboard(){
-      return view('admin.dashboard')->with(['user' => Auth::user()]);
+      $totalKata = Kata::count();
+      $editor = User::where('role', 'editor')->count();
+      $pending = User::where('role', 'pending')->count();
+
+      return view('admin.dashboard')->with([
+        'user' => Auth::user(),
+        'editor' => $editor,
+        'pending' => $pending,
+        'totalKata' => $totalKata,
+      ]);
     }
 
     public function simpanKata(Request $request){

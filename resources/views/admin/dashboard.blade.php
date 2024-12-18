@@ -19,14 +19,14 @@
 <div class="p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-0">
     <!-- Card Total Kata -->
     <a href="{{ route('daftarKata') }}"
-        class="bg-gradient-to-r from-blue-500 to-blue-700 text-white p-6 rounded-lg shadow-lg flex items-center gap-4 hover:scale-105 hover:shadow-2xl transition transform duration-300">
+        class="bg-gradient-to-r from-purple-500 to-purple-700 text-white p-6 rounded-lg shadow-lg flex items-center gap-4 hover:scale-105 hover:shadow-2xl transition transform duration-300">
         <div class="flex items-center justify-center bg-white bg-opacity-20 p-4 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM9 7h2v5H9V7zm0 6h2v2H9v-2z" />
             </svg>
         </div>
         <div>
-            <div class="text-4xl font-bold">200</div>
+            <div class="text-4xl font-bold">{{ $totalKata  }}</div>
             <p class="text-lg">Total Kata</p>
         </div>
     </a>
@@ -40,7 +40,7 @@
             </svg>
         </div>
         <div>
-            <div class="text-4xl font-bold">5</div>
+            <div class="text-4xl font-bold">{{ $editor }}</div>
             <p class="text-lg">Total Editor</p>
         </div>
     </a>
@@ -55,7 +55,7 @@
             </svg>
         </div>
         <div>
-            <div class="text-4xl font-bold">3</div>
+            <div class="text-4xl font-bold">{{ $pending }}</div>
             <p class="text-lg">Permintaan Editor</p>
         </div>
     </a>

@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<nav class="fixed top-0 z-50 w-full bg-gradient-to-r from-purple-500 to-purple-700 border-b border-gray-200 ">
+<nav class="fixed top-0 z-50 w-full bg-gradient-to-r dark:bg-gray-700 dark:divide-gray-600 border-b border-gray-200 ">
   <div class="px-3 py-3 lg:px-5 lg:pl-3">
     <div class="flex items-center justify-between">
       <div class="flex items-center justify-start rtl:justify-end">

@@ -21,14 +21,14 @@
                     <table class="w-full text-sm text-left text-gray-600">
                         <tbody>
                             @foreach ($dataEditor as $editor)
-                            
+                            {{-- {{ dd($dataEditor) }} --}}
                                 <tr class="border-b">
                                     <th class="px-4 py-2 text-gray-800 font-medium">Nama</th>
                                     <td class="px-4 py-2">{{ $editor->name }}</td>
                                 </tr>
                                 <tr class="border-b">
                                     <th class="px-4 py-2 text-gray-800 font-medium">Nama Lengkap</th>
-                                    <td class="px-4 py-2">{{ $editor->fullname }}</td>
+                                    <td class="px-4 py-2">{{ $editor->name }}</td>
                                 </tr>
                                 <tr class="border-b">
                                     <th class="px-4 py-2 text-gray-800 font-medium">Email</th>
@@ -53,8 +53,8 @@
             </div>
 
             <!-- Tombol Aksi -->
-            <div class="mt-6 flex flex-col sm:flex-row justify-end gap-4">
-                <form action="{{ route('accEditor') }}" method="POST" class="inline-block w-full sm:w-auto">
+            <div class="mt-6 flex flex-col sm:flex-row justify-end gap-2">
+                <form action="{{ route('accEditor') }}" method="POST" >
                     @csrf
                     <input type="hidden" name="id" value="{{ $editor->id }}">
                     <button type="submit" name="action"
@@ -62,14 +62,21 @@
                         <input type="hidden" name="role" value="Editor">
                         Terima
                     </button>
+                </form>
+
+                <form action="{{ route('accEditor') }}" method="POST" >
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $editor->id }}">
                     <button type="submit" name="action"
                         class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-800 w-full sm:w-auto mb-2 sm:mb-0">
                         <input type="hidden" name="role" value="Pending">
-                        Terima
+                        Tolak
                     </button>
+                </form>
+
+                    
                     
 
-                </form>
                 <a href="{{ route('aturEditor') }}"
                     class="bg-gray-500 text-white text-center px-4 py-2 rounded-md hover:bg-gray-700 w-full sm:w-auto mb-2 sm:mb-0">Kembali</a>
             </div>

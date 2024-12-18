@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 //                ==== AUTH ====
 Route::get('/login', [AuthController::class, 'viewLogin'])->name('login');
 Route::post('proses_login', [AuthController::class, 'proses_login'])->name('auth.proses_login');
-Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::get('/', [UserController::class, 'viewWelc'])->name('welcome');
@@ -38,12 +38,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [UserController::class, 'viewDashboard'])->name('dashboard');
     Route::get('/kelola_editor', [UserController::class, 'viewAturEditor'])->name('aturEditor');
     Route::get('/kelola_editor/edit/{id_editor}', [UserController::class, 'viewEditEditor'])->name('editAccEditor');
-    
+    Route::post('/verifikasi_editor', [UserController::class, 'validasiEditor'])->name('accEditor');
+
     Route::get('/daftar_kata', [UserController::class, 'viewDaftarKata'])->name('daftarKata');
     Route::get('/create_kata', [UserController::class, 'formCreateKata'])->name('formCreateKata');
     Route::post('/simpan_kata', [UserController::class, 'simpanKata'])->name('simpanKata');
     Route::get('/delete/kata/{id}', [UserController::class, 'deleteKata'])->name('deleteKata');
     Route::get('/edit/kata/{id}', [UserController::class, 'editKata'])->name('editKata');
+    Route::put('/update/kata', [UserController::class, 'updateKata'])->name('updateKata');
 
 
 
