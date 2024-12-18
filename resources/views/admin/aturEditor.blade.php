@@ -5,14 +5,10 @@
 @extends('layout.appAdmin')
 @section('konten_admin')
 @vite('resources/css/app.css')
-
-<h1 class="text-lg font-semibold mb-4 text-gray-800">Daftar Editor</h1>
-
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <!-- Header Pencarian dan Filter -->
-    <div class="p-4 bg-white flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0 sm:space-x-4">
-        <!-- Input Pencarian -->
-        <div class="relative w-full sm:w-80 lg:w-96 sm:mb-0">
+<h1 class="text-3xl font-extrabold text-black text-center">Daftar Editor</h1>
+<div class="m-4 bg-purple-900 rounded-lg">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="p-4 bg-white flex justify-between">
             <label for="table-search" class="sr-only">Search</label>
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">

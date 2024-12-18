@@ -6,32 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
-    <title>Document</title>
+    <title>Registrasi Berhasil</title>
 </head>
 
-<body>
+<body class="bg-gradient-to-b from-purple-700 to-purple-900">
 
-    <div class="flex items-center justify-center min-h-screen bg-gradient-to-b from-purple-700 to-purple-900">
-        <div class="flex flex-col items-center">
-            <div id="alert-5" class="flex items-center p-4 rounded-lg max-w-md bg-gray-50 dark:bg-gray-800 mb-3"
-                role="alert">
-                <svg class="flex-shrink-0 w-4 h-4 dark:text-gray-300" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                </svg>
-                <span class="sr-only">Info</span>
-                @if (session('success'))
-                    <div class="ms-3 text-sm font-medium text-gray-800 dark:text-gray-300">
-                        <p>{{ session('success') }}</p>
-                @endif
-                        <a href="{{ route('welcome') }}" class="font-semibold underline hover:no-underline">Kembali ke
-                            halaman pencarian</a>
-                    </div>
-                
+    <div class="flex items-center justify-center min-h-screen text-gray-50">
+        <div class="flex flex-col items-center bg-white rounded-lg shadow-lg p-8 max-w-lg text-center dark:bg-gray-800">
+            <!-- Pesan Registrasi -->
+            <h1 class="text-2xl font-bold mb-2 text-purple-700 dark:text-purple-400">Registrasi Berhasil!</h1>
+            <p class="mb-4 text-gray-700 dark:text-gray-300">
+                Terima kasih telah mendaftar. Akun Anda sedang menunggu konfirmasi dari admin. Harap cek email atau kembali nanti.
+            </p>
+
+            <!-- Tombol Kembali -->
+            <div class="flex flex-col items-center">
+                <a href="{{ route('welcome') }}" 
+                   class="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded-md shadow-md font-semibold transition duration-300">
+                    Kembali ke Halaman Utama
+                </a>
             </div>
         </div>
-        @vite(['resources/js/app.js'])
+    </div>
+
+    @vite(['resources/js/app.js'])
+
 </body>
 
 </html>
