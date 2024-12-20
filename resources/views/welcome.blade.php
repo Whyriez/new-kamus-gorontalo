@@ -10,11 +10,11 @@
     <div class="absolute top-4 right-4 flex items-center space-x-2">
         
     </div>
-    <div class="text-center">
+    <div class="text-center px-4 md:px-8">
         <h1 class="text-6xl font-bold mb-8">HULONTALO</h1>
         
-        <form class="relative w-full max-w-2xl mx-auto" action="{{ route('search') }}" method="GET">
-    <input 
+        <form class="relative w-full max-w-lg md:max-w-2xl mx-auto" action="{{ route('search') }}" method="GET">
+        <input 
             type="search" 
             name="q"
             class="block w-full h-12 p-4 pl-14 text-lg text-gray-900 rounded-full bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:outline-none" 
@@ -43,9 +43,10 @@
         </button>
         </form>
         
-        <p class="mt-4 text-sm text-gray-300">
+        <p class="mt-4 text-xs md:text-sm text-gray-500">
         *kosakata yang ada masih belum diinput semuanya, dan masih dalam tahap pengembangan
         </p>
     </div>
 </div>
+
 @endsection

@@ -3,65 +3,61 @@
 @section('title', 'Detail Kata')
 @section('konten')
 
-
-<div class="w-4/5 p-14 mx-auto">
-    <div class="flex justify-between p-6">
-        <div>
-            <div class="flex items-center">
-                <h1 class="text-3xl font-semibold text-gray-800">
+<div class="w-4/5 px-14 md:py-4 py-10 mx-auto">
+    <div class="flex flex-col lg:flex-row justify-between p-6">
+        <div class="w-full lg:w-1/2 order-2 lg:order-1">
+            <div class="flex items-center mt-5">
+                <span class="font-bold text-md mr-2">
                     @if($kata->kategori == 'Nomina')
-                        (n.) {{ $kata->gorontalo }}
+                        (n.) 
                     @elseif($kata->kategori == 'Verba')
-                        (v.) {{ $kata->gorontalo }}
+                        (v.) 
                     @elseif($kata->kategori == 'Adjektiv')
-                        (adj.) {{ $kata->gorontalo }}
+                        (adj.) 
                     @elseif($kata->kategori == 'Adverbia')
-                        (adv.) {{ $kata->gorontalo }}
+                        (adv.) 
                     @elseif($kata->kategori == 'Pronomina')
-                        (pron.) {{ $kata->gorontalo }}
+                        (pron.) 
                     @elseif($kata->kategori == 'Numeralia')
-                        (num.) {{ $kata->gorontalo }}
+                        (num.) 
                     @elseif($kata->kategori == 'Preposisi')
-                        (prep.) {{ $kata->gorontalo }}
+                        (prep.) 
                     @elseif($kata->kategori == 'Konjungsi')
-                        (conj.) {{ $kata->gorontalo }}
+                        (conj.) 
                     @elseif($kata->kategori == 'Interjeksi')
-                        (interj.) {{ $kata->gorontalo }}
+                        (interj.) 
                     @elseif($kata->kategori == 'Artikula')
-                        (art.) {{ $kata->gorontalo }}
+                        (art.) 
                     @else
-                        {{ $kata->gorontalo }} <!-- Default: if no category matched -->
+                         <!-- Default: if no category matched -->
                     @endif
-                </h1>>
+                </span>
+                <h1 class="text-3xl font-semibold text-gray-800">{{ $kata->gorontalo }}</h1>
                 <button class="bg-purple-300 hover:bg-purple-400 text-purple-900 p-2 rounded-full ml-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 9l10.5-3m-10.5 3v9l10.5-3m-10.5-6l-3-3m3 3H3m13.5-3l3 3m-3-3H21" />
                     </svg>
                 </button>
             </div>
-            <p class="text-lg text-gray-600 italic ml-14">{{ $kata -> pengucapan }}</p>
+            <p class="text-lg text-gray-600 italic">{{ $kata->pengucapan }}</p>
             <div class="mt-10">
-                <h1 class="ml-14 text-gray-700 text-md font-semibold">Indonesia :</h1>
-                <p class="ml-14 text-xl font-bold">{{ $kata -> indonesia }}</p>
+                <h1 class="text-gray-700 text-md font-semibold">Indonesia :</h1>
+                <p class="text-xl font-bold">{{ $kata->indonesia }}</p>
             </div>
             <div class="mt-10 max-w-sm">
-                <h1 class="ml-14 text-gray-700 text-md font-semibold">Kalimat :</h1>
-                <p class="ml-14 text-sm">{{ $kata -> kalimat  }}</p>
+                <h1 class="text-gray-700 text-md font-semibold">Kalimat :</h1>
+                <p class="text-sm">{{ $kata->kalimat }}</p>
             </div>
         </div>
-
-        <!-- Menampilkan Gambar Sebelumnya -->
-        @if ($kata->gambar)
-            <div class="flex-1 flex justify-end items-center max-h-60">
-                
-                    <img src="{{ asset('storage/' . $kata->gambar) }}" alt="Gambar Sebelumnya"
-                    class="bg-gray-100 max-w-md h-full rounded-lg border border-gray-400 flex items-center justify-center">
-                
+        <div class="w-full lg:w-1/2 order-1 lg:order-2 flex justify-center mt-5">
+            <div class=" w-4/6 lg:w-3/4 h-60 rounded-lg  flex items-center justify-center">
+                <img src="{{ asset('storage/' . $kata->gambar) }}" class="text-gray-500 text-sm rounded-md">
             </div>
-         @endif
-        
+        </div>
     </div>
 </div>
+
+
 
 @endsection
 

@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/update/kata', [UserController::class, 'updateKata'])->name('updateKata');
     Route::get('/daftar_kata/search', [UserController::class, 'searchKataAdmin'])->name('searchKataAdmin');
     // Route::post('/audio/store', [UserController::class, 'audio_store'])->name('audio.store');
+    Route::get('/view/kata/{id}', [UserController::class, 'viewKata'])->name('viewKata');
 
     Route::get('/admin/riwayat', [UserController::class, 'daftarHistory'])->name('daftarHistory');
     Route::get('/admin/riwayat/search', [UserController::class, 'searchHistory'])->name('searchHistory');
