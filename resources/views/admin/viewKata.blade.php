@@ -6,7 +6,31 @@
     @foreach($dataKata as $kata)
         <div class="w-full lg:w-1/2 order-2 lg:order-1">
             <div class="flex items-center mt-5">
-                <span class="font-bold text-md mr-2">({{$kata->kategori}})</span>
+                <span class="font-bold text-md mr-2">
+                    @if($kata->kategori == 'Nomina')
+                        (n.) 
+                    @elseif($kata->kategori == 'Verba')
+                        (v.) 
+                    @elseif($kata->kategori == 'Adjektiv')
+                        (adj.) 
+                    @elseif($kata->kategori == 'Adverbia')
+                        (adv.) 
+                    @elseif($kata->kategori == 'Pronomina')
+                        (pron.) 
+                    @elseif($kata->kategori == 'Numeralia')
+                        (num.) 
+                    @elseif($kata->kategori == 'Preposisi')
+                        (prep.) 
+                    @elseif($kata->kategori == 'Konjungsi')
+                        (conj.) 
+                    @elseif($kata->kategori == 'Interjeksi')
+                        (interj.) 
+                    @elseif($kata->kategori == 'Artikula')
+                        (art.) 
+                    @else
+                         <!-- Default: if no category matched -->
+                    @endif
+                </span>
                 <h1 class="text-3xl font-semibold text-gray-800">{{ $kata->gorontalo }}</h1>
                 <button class="bg-purple-300 hover:bg-purple-400 text-purple-900 p-2 rounded-full ml-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
