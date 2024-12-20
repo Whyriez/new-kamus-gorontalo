@@ -3,32 +3,63 @@
 @section('title', 'Detail Kata')
 @section('konten')
 
+
 <div class="w-4/5 p-14 mx-auto">
     <div class="flex justify-between p-6">
         <div>
             <div class="flex items-center">
-                <h1 class="text-3xl font-semibold text-gray-800">(v.) Le'ibaca</h1>
+                <h1 class="text-3xl font-semibold text-gray-800">
+                    @if($kata->kategori == 'Nomina')
+                        (n.) {{ $kata->gorontalo }}
+                    @elseif($kata->kategori == 'Verba')
+                        (v.) {{ $kata->gorontalo }}
+                    @elseif($kata->kategori == 'Adjektiv')
+                        (adj.) {{ $kata->gorontalo }}
+                    @elseif($kata->kategori == 'Adverbia')
+                        (adv.) {{ $kata->gorontalo }}
+                    @elseif($kata->kategori == 'Pronomina')
+                        (pron.) {{ $kata->gorontalo }}
+                    @elseif($kata->kategori == 'Numeralia')
+                        (num.) {{ $kata->gorontalo }}
+                    @elseif($kata->kategori == 'Preposisi')
+                        (prep.) {{ $kata->gorontalo }}
+                    @elseif($kata->kategori == 'Konjungsi')
+                        (conj.) {{ $kata->gorontalo }}
+                    @elseif($kata->kategori == 'Interjeksi')
+                        (interj.) {{ $kata->gorontalo }}
+                    @elseif($kata->kategori == 'Artikula')
+                        (art.) {{ $kata->gorontalo }}
+                    @else
+                        {{ $kata->gorontalo }} <!-- Default: if no category matched -->
+                    @endif
+                </h1>>
                 <button class="bg-purple-300 hover:bg-purple-400 text-purple-900 p-2 rounded-full ml-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 9l10.5-3m-10.5 3v9l10.5-3m-10.5-6l-3-3m3 3H3m13.5-3l3 3m-3-3H21" />
                     </svg>
                 </button>
             </div>
-            <p class="text-lg text-gray-600 italic ml-14">Le.i.ba.ca</p>
+            <p class="text-lg text-gray-600 italic ml-14">{{ $kata -> pengucapan }}</p>
             <div class="mt-10">
                 <h1 class="ml-14 text-gray-700 text-md font-semibold">Indonesia :</h1>
-                <p class="ml-14 text-xl font-bold">Suruh Membaca</p>
+                <p class="ml-14 text-xl font-bold">{{ $kata -> indonesia }}</p>
             </div>
             <div class="mt-10 max-w-sm">
                 <h1 class="ml-14 text-gray-700 text-md font-semibold">Kalimat :</h1>
-                <p class="ml-14 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id saepe ad possimus temporibus veniam iure perspiciatis animi. Pariatur, neque quos.</p>
+                <p class="ml-14 text-sm">{{ $kata -> kalimat  }}</p>
             </div>
         </div>
-        <div class="flex-1 flex justify-end items-center max-h-60">
-            <div class="bg-gray-100 w-3/4 h-full rounded-lg border border-gray-400 flex items-center justify-center">
-                <p class="text-gray-500 text-sm">Gambar</p>
+
+        <!-- Menampilkan Gambar Sebelumnya -->
+        @if ($kata->gambar)
+            <div class="flex-1 flex justify-end items-center max-h-60">
+                
+                    <img src="{{ asset('storage/' . $kata->gambar) }}" alt="Gambar Sebelumnya"
+                    class="bg-gray-100 max-w-md h-full rounded-lg border border-gray-400 flex items-center justify-center">
+                
             </div>
-        </div>
+         @endif
+        
     </div>
 </div>
 

@@ -2,7 +2,7 @@
 @section('konten_admin')
 @section('title', 'Tambah Kata')
 @if (session('success'))
-    <div class="">
+    <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
         {{ session('success') }}
     </div>
@@ -44,30 +44,41 @@
                         <option value="Artikula">Artikula</option>
                     </select>
                 </div>
+
                 <div class="mt-4">
-                    <label for="arti" class="block text-zinc-600 text-sm font-bold my-2">Pengucapan<span class="text-red-500">*</span></label>
-                    <!-- <p class="text-xs"><span class="text-red-500">*</span>contoh <span class="italic">tong.gu.la</span> -->
-                    </p>
-                    <input type="text" id="arti" name="pengucapan" placeholder="ma.ha.le"
+                    <label for="pengucapan" class="block text-zinc-600 text-sm font-bold my-2">Pengucapan<span class="text-red-500">*</span></label>
+                    <input type="text" id="pengucapan" name="pengucapan" placeholder="ma.ha.le"
                         class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                 </div>
+
                 <div class="mt-4">
                     <label class="block text-zinc-600 text-sm font-bold my-2">File</label>
                     <input type="file" name="gambar"
                         class="bg-white hover:bg-gray-100 font-semibold border border-gray-400 rounded shadow">
-                        <i class="fas fa-upload text-zinc-600 text-sm font-bold my-2 mx-2">Gambar</i>
-                    <input type="file" name="suara"
-                        class="bg-white hover:bg-gray-100 font-semibold border ml-4 border-gray-400 rounded shadow">
-                         <i class="fas fa-upload text-zinc-600 text-sm font-bold my-2 mx-2">Suara</i>
+                    <i class="fas fa-upload text-zinc-600 text-sm font-bold my-2 mx-2">Gambar</i>
                 </div>
+
                 <div class="mt-4">
-                    <label for="arti" class="block text-zinc-600 text-sm font-bold my-2">Contoh Kalimat</label>
-                    <input type="text" id="arti" name="kalimat"
+                    <label class="block text-zinc-600 text-sm font-bold my-2">Rekam Suara:</label>
+                    <div class="flex items-center gap-3">
+                        <button type="button" id="record-btn" class="px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                            Mulai Merekam
+                        </button>
+                        <button type="button" id="stop-btn" class="px-4 py-2 bg-red-500 text-white rounded-md shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400" disabled>
+                            Stop Rekaman
+                        </button>
+                    </div>
+                    <audio id="audio-preview" controls class="mt-3" style="display:none;"></audio>
+                </div>
+
+                <div class="mt-4">
+                    <label for="kalimat" class="block text-zinc-600 text-sm font-bold my-2">Contoh Kalimat</label>
+                    <input type="text" id="kalimat" name="kalimat"
                         class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                 </div>
+
                 <div class="flex w-full mt-4">
-                    <button
-                    type="submit"
+                    <button type="submit"
                         class="justify-end bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-6 rounded">Simpan</button>
                 </div>
             </div>
@@ -75,69 +86,82 @@
     </div>
 </div>
 
+<script>
+    let mediaRecorder;
+let audioChunks = [];
+let audioBlob;
+let audioUrl;
+let audioPreview = document.getElementById('audio-preview'); // untuk preview audio
+let recordBtn = document.getElementById('record-btn');
+let stopBtn = document.getElementById('stop-btn');
+let form = document.querySelector('form');
+
+// Fungsi untuk memulai perekaman suara
+function startRecording() {
+    audioChunks = []; // Kosongkan array audio
+    audioPreview.style.display = 'none'; // Sembunyikan preview audio sebelumnya
+
+    navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => {
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.ondataavailable = event => {
+                audioChunks.push(event.data); // Menyimpan potongan audio
+            };
+
+            mediaRecorder.onstop = () => {
+                audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                audioUrl = URL.createObjectURL(audioBlob);
+                audioPreview.style.display = 'block';
+                audioPreview.src = audioUrl;
+
+                // Membuat FormData untuk mengirimkan file audio
+                let formData = new FormData(form);
+                const audioFile = new File([audioBlob], 'audio.wav', { type: 'audio/wav' });
+                formData.append('audio', audioFile);
+
+                // Menambahkan CSRF token
+                formData.append('_token', document.querySelector('meta[name="csrf-token"]').content);
+
+                // Mengirim FormData dengan AJAX
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', form.action, true);
+
+                // Menambahkan CSRF token secara eksplisit di header
+                xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
+
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        console.log('Audio berhasil dikirim');
+                    } else {
+                        console.error('Terjadi kesalahan:', xhr.statusText);
+                    }
+                };
+                xhr.send(formData); // Kirim data ke server
+            };
+
+            mediaRecorder.start();
+            recordBtn.disabled = true; // Nonaktifkan tombol rekam
+            stopBtn.disabled = false; // Aktifkan tombol stop
+        })
+        .catch(error => {
+            console.error("Gagal mengakses mikrofon:", error);
+        });
+}
+
+// Fungsi untuk menghentikan rekaman
+function stopRecording() {
+    mediaRecorder.stop();
+    recordBtn.disabled = false; // Aktifkan tombol rekam lagi
+    stopBtn.disabled = true; // Nonaktifkan tombol stop
+}
+
+// Event listener untuk tombol rekam
+recordBtn.addEventListener('click', startRecording);
+
+// Event listener untuk tombol stop
+stopBtn.addEventListener('click', stopRecording);
+
+</script>
+
 @endsection
-
-
-
-
-
-
-<!-- <div class="p-4 sm:ml-64">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-            <h1 class="text-2xl font-bold text-center mb-5">Tambahkan Kata Baru</h1>
-            <div class="bg-purple-500 rounded-md p-4">
-                <div class="mb-2">
-                    <label for="kata" class="block text-zinc-600 text-sm font-bold mb-2">Gorontalo</label>
-                    <input type="text" id="kata" class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
-                </div>
-                <div class="mb-2">
-                    <label for="arti" class="block text-zinc-600 text-sm font-bold mb-2">Indonesia</label>
-                    <input type="text" id="arti" class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
-                </div>
-            <div class="mb-2">
-                <label for="kategori" class="block text-zinc-600 text-sm font-bold mb-2">Kategori</label>
-                <select id="kategori" class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <option>- Pilih kategori kata -</option>
-                        <option>Nomina</option>
-                        <option>Verba</option>
-                        <option>Adjektiv</option>
-                        <option>Adverbia</option>
-                        <option>Pronomina</option>
-                        <option>Numeralia</option>
-                        <option>Preposisi</option>
-                        <option>Konjungsi</option>
-                        <option>Interjeksi</option>
-                        <option>Artikula</option>
-                </select>
-            </div>
-            <div class="mb-2">
-                <label for="File" class="block text-zinc-600 text-sm font-bold mb-2">Pengucapan</label>
-                <select id="kategori" class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <option>- Pilih kategori kata -</option>
-                        <option>Nomina</option>
-                        <option>Verba</option>
-                        <option>Adjektiv</option>
-                        <option>Adverbia</option>
-                        <option>Pronomina</option>
-                        <option>Numeralia</option>
-                        <option>Preposisi</option>
-                        <option>Konjungsi</option>
-                        <option>Interjeksi</option>
-                        <option>Artikula</option>
-                </select>
-            </div>
-            <div class=" mt-4">
-            <label  class="block text-zinc-600 text-sm font-bold mb-2">File</label>
-                <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Upload Gambar <i class="fas fa-upload"></i></button>
-                <button class="bg-white hover:bg-gray-100 text-gray-8 00 font-semibold py-2 px-4 border border-gray-400 rounded shadow">Upload Audio <i class="fas fa-upload"></i></button>
-            </div>
-            <div class="mb-2 mt-4">
-                <label for="deskripsi" class="block text-zinc-600 text-sm font-bold mb-2">Deskripsi</label>
-                <textarea id="deskripsi"
-                    class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    rows="4" placeholder="Tambahkan deskripsi..."></textarea>
-            </div>
-            <button class="bg-blue-500 hover:bg-blue-700 text-zinc-600 font-bold py-2 px-4 rounded">Simpan</button>
-            </div>
-    </div>
-</div> -->

@@ -45,4 +45,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function editHistories()
+    {
+        return $this->hasMany(EditHistory::class, 'id_editor');
+    }
 }

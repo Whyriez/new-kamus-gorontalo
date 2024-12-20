@@ -39,6 +39,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/kelola_editor', [UserController::class, 'viewAturEditor'])->name('aturEditor');
     Route::get('/kelola_editor/edit/{id_editor}', [UserController::class, 'viewEditEditor'])->name('editAccEditor');
     Route::post('/verifikasi_editor', [UserController::class, 'validasiEditor'])->name('accEditor');
+    Route::get('/filter-editor', [UserController::class, 'filterEditor'])->name('filterEditor');
+
+    Route::get('/profil', [UserController::class, 'viewProfile'])->name('viewProfile');
+    Route::get('/profil/edit', [UserController::class, 'viewEditProfile'])->name('viewEditProfile');
 
     Route::get('/daftar_kata', [UserController::class, 'viewDaftarKata'])->name('daftarKata');
     Route::get('/create_kata', [UserController::class, 'formCreateKata'])->name('formCreateKata');
@@ -46,7 +50,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/delete/kata/{id}', [UserController::class, 'deleteKata'])->name('deleteKata');
     Route::get('/edit/kata/{id}', [UserController::class, 'editKata'])->name('editKata');
     Route::put('/update/kata', [UserController::class, 'updateKata'])->name('updateKata');
+    Route::get('/daftar_kata/search', [UserController::class, 'searchKataAdmin'])->name('searchKataAdmin');
+    // Route::post('/audio/store', [UserController::class, 'audio_store'])->name('audio.store');
 
+    Route::get('/admin/riwayat', [UserController::class, 'daftarHistory'])->name('daftarHistory');
+    Route::get('/admin/riwayat/search', [UserController::class, 'searchHistory'])->name('searchHistory');
 
 
 

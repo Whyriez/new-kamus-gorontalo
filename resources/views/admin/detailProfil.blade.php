@@ -1,12 +1,17 @@
-@extends('layout.app')
-@section('title', 'Detail Editor')
-@section('konten')
-
-    @extends('layout.appAdmin')
+@section('title', 'Profil')
+@extends('layout.appAdmin')
 @section('konten_admin')
     @vite('resources/css/app.css')
 
-    <div class="container mx-auto p-4">
+        <h1>{{ $user->name }}</h1>
+        <h1>{{ $user->email }}</h1>
+        <h1>{{ $user->role }}</h1>
+        <h1>{{ $user->fullname }}</h1>
+        <h1>{{ $user->phone_number }}</h1>
+        <h1>{{ $user->profile_photo_path }}</h1>
+        <h1>{{ $user->bio }}</h1>
+    
+    {{-- <div class="container mx-auto p-4">
         <div class="bg-white shadow-md rounded-lg p-6">
             <h1 class="text-2xl font-bold text-gray-800 mb-4">Detail Editor</h1>
             <div class="flex flex-col md:flex-row gap-6">
@@ -21,7 +26,7 @@
                     <table class="w-full text-sm text-left text-gray-600">
                         <tbody>
                             @foreach ($dataEditor as $editor)
-                            {{-- {{ dd($dataEditor) }} --}}
+                            
                                 <tr class="border-b">
                                     <th class="px-4 py-2 text-gray-800 font-medium">Nama</th>
                                     <td class="px-4 py-2">{{ $editor->name }}</td>
@@ -81,7 +86,6 @@
                     class="bg-gray-500 text-white text-center px-4 py-2 rounded-md hover:bg-gray-700 w-full sm:w-auto mb-2 sm:mb-0">Kembali</a>
             </div>
         </div>
-    </div>
+    </div> --}}
 
-@endsection
 @endsection

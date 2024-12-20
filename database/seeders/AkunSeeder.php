@@ -35,7 +35,7 @@ class AkunSeeder extends Seeder
             ],
             
         ];
-        echo "Seeder executed successfully!\n";
+        // echo "Seeder executed successfully!\n";
 
         foreach ($users as $key => $value) {
             DB::table('users')->insert($value);

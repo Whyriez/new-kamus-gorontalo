@@ -23,14 +23,14 @@
 
         <!-- Tombol Filter -->
         <div class="flex w-full sm:w-auto space-x-2">
-            <form action="" method="">
-                <button type="submit"
+            <form action="{{ route('filterEditor') }}" method="GET">
+                <button type="submit" name="role" value="Editor"
                     class="flex-1 sm:flex-none text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs sm:text-sm px-4 py-2">
                     Editor
                 </button>
             </form>
-            <form action="" method="">
-                <button type="submit"
+            <form action="{{ route('filterEditor') }}" method="GET">
+                <button type="submit" name="role" value="Pending"
                     class="flex-1 sm:flex-none text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs sm:text-sm px-4 py-2">
                     Pending
                 </button>
