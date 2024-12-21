@@ -51,7 +51,7 @@
             <textarea id="bio" name="bio" class="block w-full text-gray-700 border rounded py-2 px-3">{{ $user->bio }}</textarea>
         </div>
 
-        <!-- Tombol Simpan -->
+        
         <div class="flex items-center justify-between">
             <button type="submit" class="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-800">
                 Simpan
