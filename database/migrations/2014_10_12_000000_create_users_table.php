@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('fullname')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('profile_photo_path')->nullable();
-            $table->string('bio')->nullable();
+            $table->text('bio')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

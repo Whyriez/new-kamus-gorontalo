@@ -46,7 +46,7 @@
                         </tbody>
                     </table>
                         <div class="mt-6 flex flex-col sm:flex-row justify-center gap-2">
-                            <form>
+                            <form method="GET" action="{{ route('editProfil') }}">
                                 <button type="submit" name="action" 
                                     class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800 w-full sm:w-auto mb-2 sm:mb-0">
                                     <input type="hidden" name="role" value="Editor">

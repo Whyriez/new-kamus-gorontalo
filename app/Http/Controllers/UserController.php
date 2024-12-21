@@ -135,7 +135,7 @@ class UserController extends Controller
         $request->validate([
             'id_kata' => 'required|exists:katas,id_kata',
             'gorontalo' => 'required|string|max:255',
-            'indonesia' => 'required|string|max:255',
+            'indonesia' => 'required|string',
             'kategori' => 'required|string|max:255',
             'kalimat' => 'required|string|max:255',
             'pengucapan' => 'required|string|max:255',
@@ -270,7 +270,7 @@ class UserController extends Controller
         // Validasi input
         $request->validate([
             'gorontalo' => 'required|string|max:255',
-            'indonesia' => 'required|string|max:255',
+            'indonesia' => 'required|string',
             'kategori' => 'required|string|max:255',
             'kalimat' => 'nullable|string',
             'pengucapan' => 'nullable|string|max:255',
@@ -341,6 +341,24 @@ class UserController extends Controller
 
         }
     }
+
+    public function userHistory(Request $request, $user_id = null)
+{
+    // Jika $user_id null, gunakan ID pengguna yang sedang login
+    $user_id = $user_id ?? Auth::user()->id;
+
+    // Ambil riwayat kontribusi berdasarkan user_id
+    $editHistories = EditHistory::where('id_editor', $user_id)->get();
+
+    // Mengambil data user untuk ditampilkan di halaman
+    $user = Auth::user();
+
+    // Mengirim data ke view
+    return view('admin.detailHistory', [
+        'editHistories' => $editHistories,
+        'user' => $user
+    ]);
+}
 
     public function daftarHistory()
     {

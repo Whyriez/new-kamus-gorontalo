@@ -46,7 +46,7 @@
                 </div>
             </a>
         @endif
-        <a href="{{ route('aturEditor') }}"
+        <a href="{{ route('userHistory') }}"
             class="bg-gradient-to-r from-yellow-500 to-yellow-700 text-white p-6 rounded-lg shadow-lg flex items-center gap-4 hover:scale-105 hover:shadow-2xl transition transform duration-300">
             <div class="flex items-center justify-center bg-white bg-opacity-20 p-4 rounded-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">

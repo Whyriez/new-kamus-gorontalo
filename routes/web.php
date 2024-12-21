@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/admin/riwayat', [UserController::class, 'daftarHistory'])->name('daftarHistory');
     Route::get('/admin/riwayat/search', [UserController::class, 'searchHistory'])->name('searchHistory');
+    Route::get('/admin/riwayat/kontribusi_anda', [UserController::class, 'userHistory'])->name('userHistory');
 
 
 

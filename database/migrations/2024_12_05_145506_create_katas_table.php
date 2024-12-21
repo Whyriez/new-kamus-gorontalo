@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('katas', function (Blueprint $table) {
             $table->id('id_kata');
-            $table->String('indonesia');
+            $table->text('indonesia');
             $table->String('gorontalo');
             $table->String('kategori')->nullable();
             $table->String('kesopanan')->nullable();
