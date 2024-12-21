@@ -106,6 +106,13 @@ class UserController extends Controller
 
       return view('admin.detailProfil')->with(['user' => Auth::user()]);
     }
+   
+    public function viewEditProfile(){
+      
+      // $datauser = User::where('id', $id)->get();
+
+      return view('admin.EditProfil')->with([ 'user' => Auth::user()]);
+    }
 
     public function viewAturEditor(){
       $dataEditor = User::whereIn('role', ['editor', 'pending'])->get();
