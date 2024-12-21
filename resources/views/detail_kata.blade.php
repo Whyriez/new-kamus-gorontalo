@@ -33,7 +33,7 @@
                     @endif
                 </span>
                 <h1 class="text-3xl font-semibold text-gray-800">{{ $kata->gorontalo }}</h1>
-                <button class="bg-purple-300 hover:bg-purple-400 text-purple-900 p-2 rounded-full ml-2">
+                <button class="bg-purple-300 hover:bg-purple-400 text-purple-900 p-2 rounded-full ml-2" id="playButton_{{ $kata->id_kata }}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 9l10.5-3m-10.5 3v9l10.5-3m-10.5-6l-3-3m3 3H3m13.5-3l3 3m-3-3H21" />
                     </svg>
@@ -55,9 +55,24 @@
             </div>
         </div>
     </div>
+    <audio id="audio_{{ $kata->id_kata }}" src="{{ asset('storage/' . $kata->suara) }}"></audio>
 </div>
 
-
+<script>
+    // Menambahkan event listener untuk setiap tombol play
+    
+        document.getElementById('playButton_{{ $kata->id_kata }}').addEventListener('click', function() {
+            var audio = document.getElementById('audio_{{ $kata->id_kata }}');
+            // Cek apakah audio sedang diputar
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+                audio.currentTime = 0;  // Reset ke awal
+            }
+        });
+    
+</script>
 
 @endsection
 
