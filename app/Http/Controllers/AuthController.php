@@ -16,44 +16,27 @@ class AuthController extends Controller
         return view('auth.login');
     }
     public function proses_login(Request $request){
-        // Log::info('CSRF Token: ' . $request->_token);
-        // Log::info('Session ID before login: ' . session()->getId());
-        // dd([
-        //     'session_id' => session()->getId(),
-        //     'csrf_token_in_request' => $request->_token,
-        //     'csrf_token_in_session' => session('_token'),
-        //     'attempt' => Auth::attempt(['email' => $request->email, 'password' => $request->password]),
-        // ]);
         $email = $request->email;
         $password = $request->password;
+    
+        // Cek autentikasi dengan kondisi peran
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            // Log::info('User logged in and session regenerated.');
-            // Log::info('Session ID after login: ' . session()->getId());
-            // dd([
-            //     'session_id' => session()->getId(),
-            //     'csrf_token_in_request' => $request->_token,
-            //     'csrf_token_in_session' => session('_token'),
-            //     'attempt' => Auth::attempt(['email' => $request->email, 'password' => $request->password]),
-            // ]);
-            $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            $user = Auth::user(); // Ambil data pengguna yang diautentikasi
+            
+            // Pastikan hanya 'admin' dan 'editor' yang bisa login
+            if (in_array($user->role, ['admin', 'editor'])) {
+                $request->session()->regenerate();
+                return redirect()->intended('dashboard');
+            } else {
+                // Logout jika bukan admin/editor
+                Auth::logout();
+                return back()->with('error', 'Hanya Admin atau Editor yang diizinkan login.');
+            }
         } else {
-            // dd([
-            //     'session_id' => session()->getId(),
-            //     'csrf_token_in_request' => $request->_token,
-            //     'csrf_token_in_session' => session('_token'),
-            //     'attempt' => Auth::attempt(['email' => $request->email, 'password' => $request->password]),
-            // ]);
             return back()->with('error', 'Email atau password salah.');
         }
-        // dd([
-        //     'session_id' => session()->getId(),
-        //     'csrf_token_in_request' => $request->_token,
-        //     'csrf_token_in_session' => session('_token'),
-        //     'attempt' => Auth::attempt(['email' => $request->email, 'password' => $request->password]),
-        // ]);
-        
     }
+    
 
     public function logout(Request $request)
     {

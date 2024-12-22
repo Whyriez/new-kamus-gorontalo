@@ -4,33 +4,20 @@
 @section('konten_admin')
 @vite('resources/css/app.css')
 <h1 class="text-3xl font-extrabold text-black text-center">Daftar Kata</h1>
-<div class="m-4 bg-purple-900 rounded-lg">
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <div class="p-4 bg-white flex flex-col md:flex-row md:justify-between gap-4">
-            <div class="relative w-full md:w-auto">
-                <label for="table-search" class="sr-only">Search</label>
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                    </svg>
-                </div>
-                <form action="{{ route('searchKataAdmin') }}">
-
-                    <input type="text" id="table-search" name="q" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Cari Kata...">
-                    
-                </input>
-                </form>
-            </div>
-            <div class="w-full md:w-auto">
+<div class="m-4 p rounded-lg">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-5">
+        <div class="flex w-full">
+            <div class="justify-end">
                 <a href="{{ route('formCreateKata') }}">
-                    <button class="w-full md:w-auto lg:w-40 p-2 rounded-md hover:bg-purple-600 bg-purple-500 font-semibold text-white">
-                        + Kata
+                    <button class=" mb-2 w-full md:w-auto lg:w-40 p-2 rounded-md hover:bg-purple-600 bg-purple-500 font-semibold text-white">
+                        Tambah Kata
                     </button>
                 </a>
             </div>
         </div>
         
-        <table class="w-full text-sm text-left text-gray-500">
+        <table class="w-full text-sm text-left text-gray-500 p-10" id="pagination-table">
+            
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="p-4 hidden sm:table-cell">
@@ -78,8 +65,19 @@
                 @endforeach
             </tbody>
         </table>
+        
     </div>
 </div>
 
+
+<script>
+    // if (document.getElementById("pagination-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+    //     const dataTable = new simpleDatatables.DataTable("#pagination-table", {
+    //         paging: true,
+    //         perPage: 10,
+    //         perPageSelect: [10, 25, 50, 100],
+    //         sortable: false
+    //     });
+</script>
 
 @endsection

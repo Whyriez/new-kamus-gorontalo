@@ -67,8 +67,10 @@ class UserController extends Controller
     }
 
     public function search(Request $request) {
-      $query = $request->input('q');
-      
+      $query = trim($request->input('q'));
+      if (empty($query)) {
+          return redirect()->back()->with('error', 'Masukkan kata kunci pencarian yang valid.');
+      }
       $results = Kata::where('gorontalo', 'LIKE', "%$query%")
                       ->orWhere('indonesia', 'LIKE', "%$query%")
                       ->get();
@@ -81,9 +83,10 @@ class UserController extends Controller
       
       $dataKata = Kata::where('gorontalo', 'LIKE', "%$query%")
                       ->orWhere('indonesia', 'LIKE', "%$query%")
-                      ->get();
-      
-      return view('admin.daftarKata', compact('dataKata'));
+                      ->paginate(10);
+      $user = Auth::user();
+  
+      return view('admin.daftarKata', compact('dataKata','user'));
     }
     
     public function getById($primaryKey) {
@@ -93,7 +96,7 @@ class UserController extends Controller
           return redirect()->back()->with('error', 'Kata tidak ditemukan.');
       }
   
-      return view('detail_kata', compact('kata'));
+      return view('detail_kata', compact('kata','user'));
     }
 
     //##########======== Admin View Routing =========############
@@ -103,10 +106,61 @@ class UserController extends Controller
     }
 
     public function viewProfile(){
-
+      $user = Auth::user();
+      // dd($user->profile_photo_path);
       return view('admin.detailProfil')->with(['user' => Auth::user()]);
     }
+   
+    public function viewEditProfile(){
+      
+      // $datauser = User::where('id', $id)->get();
 
+      return view('admin.EditProfil')->with([ 'user' => Auth::user()]);
+    }
+
+    public function updateProfile(Request $request)
+{
+    // Validasi inputan
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'fullname' => 'nullable|string|max:255',
+        'email' => 'required|email|unique:users,email,' . auth()->id(),
+        'phone_number' => 'nullable|string|min:6|max:15',
+        'bio' => 'nullable|string',
+        'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+    ]);
+
+    $user = auth()->user(); // Ambil user yang sedang login
+
+    // Update atribut model User secara manual
+    $user->name = $request->name;
+    $user->fullname = $request->fullname;
+    $user->email = $request->email;
+    $user->phone_number = $request->phone_number;
+    $user->bio = $request->bio;
+
+    // Simpan perubahan tanpa foto
+    $user->save();
+    
+    // Jika ada foto profil, proses upload
+    if ($request->hasFile('profile_photo')) {
+        // Hapus foto lama jika ada
+        if ($user->profile_photo_path && file_exists(public_path('storage/' . $user->profile_photo_path))) {
+            unlink(public_path('storage/' . $user->profile_photo_path));
+        }
+
+        // Simpan foto baru
+        $profilePicturePath = $request->file('profile_photo')->store('profile-pictures', 'public');
+        $user->profile_photo_path = $profilePicturePath; // Update path gambar baru
+
+        // Simpan perubahan gambar
+        $user->save(); // Simpan perubahan gambar ke dalam database
+    }
+
+    return redirect()->route('viewProfile')->with('success', 'Profil berhasil diperbarui.');
+}
+
+    
     public function viewAturEditor(){
       $dataEditor = User::whereIn('role', ['editor', 'pending'])->get();
 
@@ -114,6 +168,7 @@ class UserController extends Controller
     }
 
     public function viewDaftarKata(){
+      // $dataKata = Kata::paginate(500);
       $dataKata = Kata::all();
       return view('admin.daftarKata')->with(['dataKata' => $dataKata, 'user' => Auth::user()]);
     }
@@ -215,9 +270,6 @@ class UserController extends Controller
         // Simpan perubahan
         $editor->save();
       }
-      // $dataEditor->role = $request->role;
-      // $dataEditor->save();
-      // dd($dataEditor); 
 
       return view('admin.edit_editor')->with(['dataEditor' => $dataEditor, 'user' => Auth::user()]);
     }
@@ -258,16 +310,7 @@ class UserController extends Controller
 
     public function simpanKata(Request $request)
     {
-      // $audioFile = $request->file('audio');
-      // if ($audioFile) {
-      //   \Log::info('File details: ', [
-      //     'extension' => $audioFile->getClientOriginalExtension(),
-      //     'mime_type' => $audioFile->getMimeType(),
-      //     'size' => $audioFile->getSize(),
-      // ]);
-      // }
       try {
-        // Validasi input
         $request->validate([
             'gorontalo' => 'required|string|max:255',
             'indonesia' => 'required|string',
@@ -278,19 +321,16 @@ class UserController extends Controller
             'audio' => 'nullable|file|max:2048',
         ]);
 
-        // Simpan gambar
         $gambarPath = null;
         if ($request->hasFile('gambar')) {
             $gambarPath = $request->file('gambar')->store('images', 'public');
         }
 
-        // Simpan audio
         $audioPath = null;
         if ($request->hasFile('audio')) {
             $audioPath = $request->file('audio')->store('audio-files', 'public');
         }
-        // dd($request->all());
-        // Simpan data ke database
+
         $kata = Kata::create([
             'gorontalo' => $request->gorontalo,
             'indonesia' => $request->indonesia,
@@ -308,13 +348,10 @@ class UserController extends Controller
             'activity' => 'Menambahkan kata ' . $kata->gorontalo,
         ]);
 
-        // Redirect dengan pesan sukses
         return redirect()->route('daftarKata')->with('success', 'Data berhasil ditambahkan.');
     } catch (\Exception $e) {
-        // Log error untuk debugging
-        \Log::error('Error saat menyimpan kata: ' . $e->getMessage());
-        // dd($request->all());
-        // Redirect dengan pesan error
+
+        Log::error('Error saat menyimpan kata: ' . $e->getMessage());
         return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi.');
     }
     }
@@ -325,21 +362,6 @@ class UserController extends Controller
         Kata::where('id_kata', $id)->delete();
         
         return redirect()->route('daftarKata')->with('success', 'Data berhasil dihapus.');
-        
-        // Ref. Delete File
-        $dataDetail = Share::where('idFilePenelitian', $id)->get();
-        if ($data) {
-            $pathFile = $data->file;
-            // dd($pathFile);
-            if ($pathFile != null || $pathFile != '') {
-                Storage::delete($pathFile);
-            }
-
-            foreach ($dataDetail as $share) {
-                $share->delete();
-            }
-
-        }
     }
 
     public function userHistory(Request $request, $user_id = null)
@@ -368,7 +390,7 @@ class UserController extends Controller
                                     ->paginate(20);
 
         // Mengirim data ke view
-        return view('admin.detailHistory', compact('editHistories'));
+        return view('admin.detailHistory')->with(['editHistories' => $editHistories, 'user' => Auth::user()]);
     }
 
     public function searchHistory(Request $request)
@@ -391,7 +413,7 @@ class UserController extends Controller
         ->get();
 
     // Return the filtered results as JSON
-        return view('admin.detailHistory', compact('editHistories'));
+    return view('admin.detailHistory')->with(['editHistories' => $editHistories, 'user' => Auth::user()]);
     }
 
         public function filterEditor(Request $request)
@@ -407,7 +429,7 @@ class UserController extends Controller
         }
         // Jika role 'pending' dipilih
         else if ($role == 'pending') {
-          dd('yasalh');
+          // dd('yasalh');
             // Menampilkan data pengguna dengan role 'pending'
             $dataEditor = User::where('role', 'pending')->get();
         }
@@ -417,7 +439,7 @@ class UserController extends Controller
         }
 
         // Mengirim data editor ke view
-        return view('admin.aturEditor', compact('dataEditor'));
+        return view('admin.detailHistory')->with(['editHistories' => $editHistories, 'user' => Auth::user()]);
     }
     
 }

@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/profil', [UserController::class, 'viewProfile'])->name('viewProfile');
     Route::get('/profil/edit', [UserController::class, 'viewEditProfile'])->name('viewEditProfile');
+    Route::post('/update_profile', [UserController::class, 'updateProfile'])->name('updateProfile');
 
     Route::get('/daftar_kata', [UserController::class, 'viewDaftarKata'])->name('daftarKata');
     Route::get('/create_kata', [UserController::class, 'formCreateKata'])->name('formCreateKata');

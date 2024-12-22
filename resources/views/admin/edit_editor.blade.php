@@ -12,9 +12,9 @@
             <div class="flex flex-col md:flex-row gap-6">
                 @foreach ($dataEditor as $editor)
                     <!-- Foto Profil -->
-                    @if ($user->img)
+                    @if ($editor->profile_photo_path)
                         <!-- Tampilkan gambar dari field 'img' jika tidak null -->
-                        <img src="{{ asset('storage/' . $user->img) }}" alt="" width="175px" height="175px"
+                        <img src="{{ asset('storage/' . $editor->profile_photo_path) }}" alt="" width="175px" height="175px"
                             class="w-32 h-32 object-cover rounded-full mx-auto md:mx-0">
                     @else
                         <!-- Jika field 'img' kosong/null, tampilkan gambar default dari folder 'public' -->

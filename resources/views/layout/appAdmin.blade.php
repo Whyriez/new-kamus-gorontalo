@@ -7,6 +7,9 @@
     <title>@yield('title')</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
+
     @vite('resources/css/app.css')
 </head>
 
@@ -38,9 +41,9 @@
                                 class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                                 aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                 <span class="sr-only">Open user menu</span>
-                                @if ($user->img)
+                                @if ($user->profile_photo_path)
                                     <!-- Tampilkan gambar dari field 'img' jika tidak null -->
-                                    <img class="w-8 h-8 rounded-full" src="{{ asset('storage/' . $user->img) }}"
+                                    <img class="w-8 h-8 rounded-full" src="{{ asset('storage/' . $user->profile_photo_path) }}"
                                         alt="user photo">
                                 @else
                                     <!-- Jika field 'img' kosong/null, tampilkan gambar default dari folder 'public' -->
@@ -156,8 +159,34 @@
                 isModalShown = false;
             });
         });
+
+        if (document.getElementById("pagination-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+        const dataTable = new simpleDatatables.DataTable("#pagination-table", {
+            paging: true,
+            perPage: 10,
+            perPageSelect: [10, 25, 50, 100],
+            sortable: false
+        });
+        }
+        if (document.getElementById("history-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+        const dataTableHistory = new simpleDatatables.DataTable("#history-table", {
+            paging: true,
+            perPage: 10,
+            perPageSelect: [10, 25, 50, 100],
+            sortable: false
+        });
+        }
+        if (document.getElementById("editor-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+        const dataTableEditor = new simpleDatatables.DataTable("#editor-table", {
+            paging: true,
+            perPage: 10,
+            perPageSelect: [10, 25, 50, 100],
+            sortable: false
+        });
+        }
+    
     </script>
-    <script src="../../../node_modules/flowbite/dist/flowbite.min.js"></script>
+    {{-- <script src="../../../node_modules/flowbite/dist/flowbite.min.js"></script> --}}
     @vite(['resources/js/app.js'])
 
 </body>
