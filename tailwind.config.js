@@ -1,4 +1,5 @@
-/** @type {import('tailwindcss').Config} */
+import plugin from 'flowbite/plugin';
+
 export default {
   darkMode: 'media',
   content: [
@@ -11,9 +12,8 @@ export default {
     extend: {},
   },
   plugins: [
-    require('flowbite/plugin')({
+    plugin({
       datatables: true,
-  }),
-  ]
-}
-
+    }),
+  ],
+};
