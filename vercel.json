@@ -33,6 +33,7 @@
         "DB_PASSWORD": "035bcd55e3a95bd38c261c8ee99b43067c6d5de5"
     },
     "build": {
+        "command": "npm run build",
         "env": {
         "LD_LIBRARY_PATH": "/usr/lib:/usr/local/lib"
         }
