@@ -31,5 +31,10 @@
         "DB_DATABASE": "dbkamus_pendetail",
         "DB_USERNAME": "dbkamus_pendetail",
         "DB_PASSWORD": "035bcd55e3a95bd38c261c8ee99b43067c6d5de5"
+    },
+    "build": {
+        "env": {
+        "LD_LIBRARY_PATH": "/usr/lib:/usr/local/lib"
+        }
     }
 }
