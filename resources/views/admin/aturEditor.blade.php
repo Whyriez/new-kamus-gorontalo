@@ -28,7 +28,17 @@
                     <td class="px-6 py-4 font-medium text-gray-900">{{ $editor->name }}</td>
                     <td class="px-6 py-4">{{ $editor->email }}</td>
                     <td class="px-6 py-4">{{ $editor->phone_number }}</td>
-                    <td class="px-6 py-4">{{ $editor->role }}</td>
+                    <td class="px-6 py-4 ">
+                        @if ($editor->role == 'Editor')
+                        <p class="px-3 py-2 inline-flex text-xs leading-5 font-semibold rounded-md bg-green-200 text-green-600">
+                            {{ $editor->role }}
+                        </p>
+                        @else
+                        <p class="px-3 py-2 inline-flex text-xs leading-5 font-semibold rounded-md bg-yellow-200 text-yellow-600">
+                            {{ $editor->role }}
+                        </p>
+                        @endif
+                    </td>
                     <td class="px-6 py-4">
                         <a href="{{ route('editAccEditor', $editor->id) }}"
                             class="bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-800 transition">

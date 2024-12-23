@@ -416,30 +416,5 @@ class UserController extends Controller
     return view('admin.detailHistory')->with(['editHistories' => $editHistories, 'user' => Auth::user()]);
     }
 
-        public function filterEditor(Request $request)
-    {
-        // Mengambil nilai 'role' yang dikirim dari form filter
-        $role = $request->input('role');
-
-        // Jika role 'editor' dipilih
-        if ($role == 'editor') {
-            // Menampilkan data pengguna dengan role 'editor'
-            $dataEditor = User::where('role', 'editor')->get();
-            dd('anjay');
-        }
-        // Jika role 'pending' dipilih
-        else if ($role == 'pending') {
-          // dd('yasalh');
-            // Menampilkan data pengguna dengan role 'pending'
-            $dataEditor = User::where('role', 'pending')->get();
-        }
-        // Jika tidak ada filter (default) maka tampilkan semua pengguna
-        else {
-            $dataEditor = User::whereIn('role', ['editor', 'pending'])->get();
-        }
-
-        // Mengirim data editor ke view
-        return view('admin.detailHistory')->with(['editHistories' => $editHistories, 'user' => Auth::user()]);
-    }
     
 }

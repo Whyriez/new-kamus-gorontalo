@@ -14,8 +14,8 @@
                     <!-- Foto Profil -->
                     @if ($editor->profile_photo_path)
                         <!-- Tampilkan gambar dari field 'img' jika tidak null -->
-                        <img src="{{ asset('storage/' . $editor->profile_photo_path) }}" alt="" width="175px" height="175px"
-                            class="w-32 h-32 object-cover rounded-full mx-auto md:mx-0">
+                        <img src="{{ asset('storage/' . $editor->profile_photo_path) }}" alt="" width="175px"
+                            height="175px" class="w-32 h-32 object-cover rounded-full mx-auto md:mx-0">
                     @else
                         <!-- Jika field 'img' kosong/null, tampilkan gambar default dari folder 'public' -->
                         <img src="{{ asset('img/default.png') }}" alt="Default Image" width="175px" height="175px"
@@ -38,7 +38,7 @@
                                 </tr>
                                 <tr class="border-b">
                                     <th class="px-4 py-2 text-gray-800 font-medium">Nama Lengkap</th>
-                                    <td class="px-4 py-2">{{ $editor->name }}</td>
+                                    <td class="px-4 py-2">{{ $editor->fullname }}</td>
                                 </tr>
                                 <tr class="border-b">
                                     <th class="px-4 py-2 text-gray-800 font-medium">Email</th>
@@ -50,7 +50,19 @@
                                 </tr>
                                 <tr class="border-b">
                                     <th class="px-4 py-2 text-gray-800 font-medium">Role</th>
-                                    <td class="px-4 py-2">{{ $editor->role }}</td>
+                                    <td class="px-4 py-2">
+                                        @if ($editor->role == 'Editor')
+                                            <p
+                                                class="px-3 py-2 inline-flex text-xs leading-5 font-semibold rounded-md bg-green-200 text-green-600">
+                                                {{ $editor->role }}
+                                            </p>
+                                        @else
+                                            <p
+                                                class="px-3 py-2 inline-flex text-xs leading-5 font-semibold rounded-md bg-yellow-200 text-yellow-600">
+                                                {{ $editor->role }}
+                                            </p>
+                                        @endif
+                                    </td>
                                 </tr>
                                 <tr class="border-b">
                                     <th class="px-4 py-2 text-gray-800 font-medium">Bio</th>
