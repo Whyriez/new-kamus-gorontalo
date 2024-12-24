@@ -8,7 +8,7 @@
     },
     "routes": [
         {
-            "src": "^http://(.*)",
+            "src": "^https://(.*)",
             "status": 301,
             "dest": "https://$1"
           },
