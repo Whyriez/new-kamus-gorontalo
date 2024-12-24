@@ -7,6 +7,11 @@
       }
     },
     "routes": [
+        {
+            "src": "^http://(.*)",
+            "status": 301,
+            "dest": "https://$1"
+          },
         { "src": "/build/(.*)", "dest": "/public/build/$1" },
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
