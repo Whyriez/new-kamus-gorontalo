@@ -9,7 +9,4 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    build: {
-        outDir: 'public/build', // Laravel biasanya menggunakan 'public/build'
-    },
 });
