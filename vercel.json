@@ -10,6 +10,12 @@
         { "src": "/build/(.*)", "dest": "/public/build/$1" },
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
+    "rewrites": [
+        { "source": "/(.*)", "destination": "https://kamus-gorontalo.vercel.app/$1" }
+    ],
+    "redirects": [
+        { "source": "/(.*)", "destination": "https://kamus-gorontalo.vercel.app/$1", "permanent": true }
+    ],
     "public": true,
     "buildCommand": "vite build", 
     "outputDirectory": "public", 
@@ -49,12 +55,6 @@
           "use": "@vercel/static"
         }
       ]
-    },
-    "rewrites": [
-        { "source": "/(.*)", "destination": "https://kamus-gorontalo.vercel.app/$1" }
-    ],
-    "redirects": [
-        { "source": "/(.*)", "destination": "https://kamus-gorontalo.vercel.app/$1", "permanent": true }
-    ]
+    }
   }
   
