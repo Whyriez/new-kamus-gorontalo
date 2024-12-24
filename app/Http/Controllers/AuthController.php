@@ -24,7 +24,7 @@ class AuthController extends Controller
             $user = Auth::user(); // Ambil data pengguna yang diautentikasi
             
             // Pastikan hanya 'admin' dan 'editor' yang bisa login
-            if (in_array($user->role, ['admin', 'editor'])) {
+            if (in_array($user->role, ['admin', 'Editor'])) {
                 $request->session()->regenerate();
                 return redirect()->intended('dashboard');
             } else {
