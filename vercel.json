@@ -49,6 +49,9 @@
           "use": "@vercel/static"
         }
       ]
-    }
+    },
+    "rewrites": [
+        { "source": "/(.*)", "destination": "https://kamus-gorontalo.vercel.app/$1" }
+    ]
   }
   
