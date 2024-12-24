@@ -10,7 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
 
-    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    
 </head>
 
 <body>
@@ -187,7 +188,8 @@
     
     </script>
     {{-- <script src="../../../node_modules/flowbite/dist/flowbite.min.js"></script> --}}
-    @vite(['resources/js/app.js'])
+    {{-- @vite(['resources/js/app.js']) --}}
+    <script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 
