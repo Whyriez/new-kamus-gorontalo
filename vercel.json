@@ -1,21 +1,19 @@
 {
   "version": 2,
   "framework": null,
-  "functions": {
-    "api/index.php": { 
-      "runtime": "vercel-php@0.5.3"
-    }
-  },
-
-  "routes": [
+  "builds": [
     {
-        "src": "^https://(.*)",
-        "status": 301,
-        "dest": "https://$1"
-      },
-    { "src": "/build/(.*)", "dest": "/public/build/$1" },
-    { "src": "/(.*)", "dest": "/api/index.php" }
-],
+      "src": "package.json",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "redirects": [
+    { "source": "/(.*)", "destination": "https://$1", "permanent": true }
+  ],
   "public": true,
   "buildCommand": "vite build", 
   "outputDirectory": "public", 
