@@ -1,4 +1,3 @@
-
 {
   "version": 2,
   "framework": null,
@@ -13,7 +12,7 @@
     }
   ],
   "redirects": [
-    { "source": "/(.*)", "destination": "https://new-kamus-gorontalo-teal.vercel.app/$1", "permanent": true }
+    { "source": "/(.*)", "destination": "https://new-kamus-gorontalo-five.vercel.app/$1", "permanent": true }
   ],
   "public": true,
   "buildCommand": "vite build", 
@@ -21,8 +20,8 @@
   "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
-    "APP_URL": "https://new-kamus-gorontalo-teal.vercel.app",
-    "APP_KEY": "base64:KNvbG27KIbPI0ziLi7eGchSMGEPB9ZZD+GWFzOeynbg=",
+    "APP_URL": "https://new-kamus-gorontalo-five.vercel.app",
+    "APP_KEY": "base64:qDMQ/jAUQhOhwrSiALoH/OT+u+nUnXEyeG0u87CnxLA=",
     "APP_CONFIG_CACHE": "/tmp/config.php",
     "APP_EVENTS_CACHE": "/tmp/events.php",
     "APP_PACKAGES_CACHE": "/tmp/packages.php",
@@ -38,7 +37,7 @@
     "DB_DATABASE": "dbkamus_pendetail",
     "DB_USERNAME": "dbkamus_pendetail",
     "DB_PASSWORD": "035bcd55e3a95bd38c261c8ee99b43067c6d5de5",
-    "VITE_APP_URL": "https://new-kamus-gorontalo-teal.vercel.app"
+    "VITE_APP_URL": "https://new-kamus-gorontalo-five.vercel.app"
   },
   "build": {
     "env": {
