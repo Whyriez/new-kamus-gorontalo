@@ -1,6 +1,7 @@
+
 {
   "version": 2,
-  "functions": {
+ "functions": {
       "api/index.php": {
           "runtime": "vercel-php@0.5.3"
       }
@@ -15,26 +16,35 @@
           "dest": "/api/index.php"
       }
   ],
+  "public": true,
+  "buildCommand": "vite build", 
+  "outputDirectory": "public", 
   "env": {
-      "APP_ENV": "production",
-      "APP_DEBUG": "false",
-      "APP_URL": "https://new-kamus-gorontalo.vercel.app",
-      "APP_KEY": "base64:KNvbG27KIbPI0ziLi7eGchSMGEPB9ZZD+GWFzOeynbg=",
-      "APP_CONFIG_CACHE": "/tmp/config.php",
-      "APP_EVENTS_CACHE": "/tmp/events.php",
-      "APP_PACKAGES_CACHE": "/tmp/packages.php",
-      "APP_ROUTES_CACHE": "/tmp/routes.php",
-      "APP_SERVICES_CACHE": "/tmp/services.php",
-      "VIEW_COMPILED_PATH": "/tmp",
-      "CACHE_DRIVER": "array",
-      "LOG_CHANNEL": "stderr",
-      "SESSION_DRIVER": "cookie",
-      "DB_CONNECTION": "mysql",
-      "DB_HOST": "ek313.h.filess.io",
-      "DB_PORT": "3307",
-      "DB_DATABASE": "dbkamus_pendetail",
-      "DB_USERNAME": "dbkamus_pendetail",
-      "DB_PASSWORD": "035bcd55e3a95bd38c261c8ee99b43067c6d5de5"
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "APP_URL": "https://new-kamus-gorontalo-teal.vercel.app",
+    "APP_KEY": "base64:KNvbG27KIbPI0ziLi7eGchSMGEPB9ZZD+GWFzOeynbg=",
+    "APP_CONFIG_CACHE": "/tmp/config.php",
+    "APP_EVENTS_CACHE": "/tmp/events.php",
+    "APP_PACKAGES_CACHE": "/tmp/packages.php",
+    "APP_ROUTES_CACHE": "/tmp/routes.php",
+    "APP_SERVICES_CACHE": "/tmp/services.php",
+    "VIEW_COMPILED_PATH": "/tmp",
+    "CACHE_DRIVER": "array",
+    "LOG_CHANNEL": "stderr",
+    "SESSION_DRIVER": "cookie",
+    "DB_CONNECTION": "mysql",
+    "DB_HOST": "ek313.h.filess.io",
+    "DB_PORT": "3307",
+    "DB_DATABASE": "dbkamus_pendetail",
+    "DB_USERNAME": "dbkamus_pendetail",
+    "DB_PASSWORD": "035bcd55e3a95bd38c261c8ee99b43067c6d5de5",
+    "VITE_APP_URL": "https://new-kamus-gorontalo-teal.vercel.app"
   },
-  "outputDirectory": "public"
+  "build": {
+    "env": {
+      "LD_LIBRARY_PATH": "/usr/lib:/usr/local/lib",
+      "NODE_ENV": "production"
+    }
+  }
 }
