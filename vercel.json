@@ -6,6 +6,16 @@
           "runtime": "vercel-php@0.5.3"
       }
   },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/index.html",
+      "use": "@vercel/static"
+    }
+  ],
   "routes": [
       {
           "src": "/img/(.*)",
