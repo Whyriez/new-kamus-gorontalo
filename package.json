@@ -2,7 +2,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "vite"
+        "dev": "php artisan serve"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.20",
