@@ -1,23 +1,21 @@
 {
   "version": 2,
-  "framework": null,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "public/index.html",
-      "use": "@vercel/static"
-    }
+  "functions": {
+      "api/index.php": {
+          "runtime": "vercel-php@0.5.3"
+      }
+  },
+  "routes": [
+      {
+          "src": "/img/(.*)",
+          "dest": "/public/img/"
+      },
+      {
+          "src": "/(.*)",
+          "dest": "/api/index.php"
+      }
   ],
-  "redirects": [
-    { "source": "/(.*)", "destination": "https://$1", "permanent": true }
-  ],
-  "public": true,
-  "buildCommand": "vite build", 
-  "outputDirectory": "public", 
-  "env": {
+ "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
     "APP_URL": "https://new-kamus-gorontalo-two.vercel.app",
@@ -39,10 +37,5 @@
     "DB_PASSWORD": "035bcd55e3a95bd38c261c8ee99b43067c6d5de5",
     "VITE_APP_URL": "https://new-kamus-gorontalo-two.vercel.app"
   },
-  "build": {
-    "env": {
-      "LD_LIBRARY_PATH": "/usr/lib:/usr/local/lib",
-      "NODE_ENV": "production"
-    }
-  }
+  "outputDirectory": "public"
 }
