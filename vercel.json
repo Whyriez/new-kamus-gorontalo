@@ -1,6 +1,11 @@
 {
   "version": 2,
   "framework": null,
+  "functions": {
+    "api/index.php": { 
+      "runtime": "vercel-php@0.5.3"
+    }
+  },
   "builds": [
     {
       "src": "package.json",
@@ -11,9 +16,15 @@
       "use": "@vercel/static"
     }
   ],
-  "redirects": [
-    { "source": "/(.*)", "destination": "https://new-kamus-gorontalo-test.vercel.app/$1", "permanent": true }
-  ],
+  "routes": [
+    {
+        "src": "^https://(.*)",
+        "status": 301,
+        "dest": "https://$1"
+      },
+    { "src": "/build/(.*)", "dest": "/public/build/$1" },
+    { "src": "/(.*)", "dest": "/api/index.php" }
+],
   "public": true,
   "buildCommand": "vite build", 
   "outputDirectory": "public", 
