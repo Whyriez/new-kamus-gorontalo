@@ -1,20 +1,19 @@
 
 {
   "version": 2,
- "functions": {
-      "api/index.php": {
-          "runtime": "vercel-php@0.5.3"
-      }
-  },
-  "routes": [
-      {
-          "src": "/img/(.*)",
-          "dest": "/public/img/"
-      },
-      {
-          "src": "/(.*)",
-          "dest": "/api/index.php"
-      }
+  "framework": null,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "redirects": [
+    { "source": "/(.*)", "destination": "https://new-kamus-gorontalo-teal.vercel.app/$1", "permanent": true }
   ],
   "public": true,
   "buildCommand": "vite build", 
