@@ -1,8 +1,6 @@
 {
     "version": 2,
     "framework": null,
-
-    
     "builds": [
         {
           "src": "package.json",
@@ -46,7 +44,7 @@
       "DB_DATABASE": "dbkamus_pendetail",
       "DB_USERNAME": "dbkamus_pendetail",
       "DB_PASSWORD": "035bcd55e3a95bd38c261c8ee99b43067c6d5de5",
-      "VITE_APP_URL": "https://new-kamus-gorontalo.vercel.app"
+      "VITE_APP_URL": "https://kamus-gorontalo.vercel.app"
     },
     "build": {
       "env": {
