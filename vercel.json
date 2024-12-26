@@ -1,8 +1,11 @@
 {
     "version": 2,
-    "functions": {
-      "api/index.php": { "runtime": "vercel-php@0.5.3" }
-    },
+    "builds": [
+      {
+        "src": "public/**",
+        "use": "@vercel/static"
+      }
+    ],
     "routes": [
       {
         "src": "/(css|js|images|fonts|build)/(.*)",
@@ -24,5 +27,6 @@
       "DB_DATABASE": "dbkamus_pendetail",
       "DB_USERNAME": "dbkamus_pendetail",
       "DB_PASSWORD": "035bcd55e3a95bd38c261c8ee99b43067c6d5de5"
-    }
+    },
+    "buildCommand": "php artisan vite:config && npm run build"
   }
