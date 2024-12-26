@@ -5,16 +5,13 @@
       "api/index.php": { "runtime": "vercel-php@0.5.3" }
   },
   "routes": [
-      { "src": "/build/(.*)", "dest": "/public/build/" },
       { "src": "/(.*)", "dest": "/api/index.php" }
   ],
-  "public": true,
-  "buildCommand": "vite build",
   "outputDirectory": "public",
   "env": {
       "APP_ENV": "production",
       "APP_DEBUG": "false",
-      "APP_URL": "https://kamus-gorontalo.vercel.app",
+      "APP_URL": "https://new-kamus-gorontalo.vercel.app",
       "APP_KEY": "base64:qDMQ/jAUQhOhwrSiALoH/OT+u+nUnXEyeG0u87CnxLA=",
       "APP_CONFIG_CACHE": "/tmp/config.php",
       "APP_EVENTS_CACHE": "/tmp/events.php",
@@ -31,11 +28,5 @@
       "DB_DATABASE": "dbkamus_pendetail",
       "DB_USERNAME": "dbkamus_pendetail",
       "DB_PASSWORD": "035bcd55e3a95bd38c261c8ee99b43067c6d5de5"
-  },
-  "build": {
-      "env": {
-      "LD_LIBRARY_PATH": "/usr/lib:/usr/local/lib",
-      "NODE_ENV": "production"
-      }
   }
 }
